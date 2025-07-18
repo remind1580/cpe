@@ -248,7 +248,7 @@ st.markdown("""
 st.markdown('<h1 class="main-title">CPE Risk Predictor</h1>', unsafe_allow_html=True)
 st.markdown('''
 <p style="
-    font-size: 2.5rem; 
+    font-size: 2.0rem; 
     color: #000000; 
     margin-bottom: 2.5rem; 
     font-style: normal; 
