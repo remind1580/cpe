@@ -35,11 +35,12 @@ st.markdown("""
     
     /* Large subtitle */
     .subtitle {
-        font-size: 3.0rem;
+        font-size: 2.5rem;      
         color: #000000;
         margin-bottom: 2.5rem;
-        font-style: italic;
+        font-style: normal;
         text-align: center;
+        font-weight: 500;
     }
     
     /* Section boxes */
