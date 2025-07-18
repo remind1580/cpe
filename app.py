@@ -12,19 +12,17 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# MDCalc style CSS
+# MDCalc style CSS (기존과 동일)
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
-    /* Clean MDCalc background */
     .stApp {
         background-color: #F8F9FA;
         font-family: 'Inter', sans-serif;
         color: #333333;
     }
     
-    /* Main title */
     .main-title {
         font-size: 2.5rem;
         font-weight: 700;
@@ -39,7 +37,6 @@ st.markdown("""
         font-style: italic;
     }
     
-    /* Section boxes like MDCalc */
     .section-box {
         background: #FFFFFF;
         border: 1px solid #E1E5E9;
@@ -49,7 +46,6 @@ st.markdown("""
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     
-    /* Section headers */
     .section-header {
         font-size: 1.5rem;
         font-weight: 600;
@@ -59,7 +55,6 @@ st.markdown("""
         border-bottom: 2px solid #E1E5E9;
     }
     
-    /* Radio button styling */
     .stRadio > label {
         font-size: 1.1rem !important;
         font-weight: 500 !important;
@@ -93,7 +88,6 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Number input styling */
     .stNumberInput > label {
         font-size: 1.1rem !important;
         font-weight: 500 !important;
@@ -107,26 +101,6 @@ st.markdown("""
         font-size: 1rem !important;
     }
     
-    /* Calculate button like MDCalc */
-    .calculate-button {
-        background: #28A745;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        font-weight: 600;
-        width: 100%;
-        margin: 2rem 0;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-    
-    .calculate-button:hover {
-        background: #218838;
-    }
-    
-    /* Results box like MDCalc */
     .results-box {
         background: #28A745;
         color: white;
@@ -147,12 +121,10 @@ st.markdown("""
         line-height: 1.6;
     }
     
-    /* Risk levels */
     .risk-high .results-box { background: #DC3545; }
     .risk-medium .results-box { background: #FD7E14; }
     .risk-low .results-box { background: #28A745; }
     
-    /* Model info box */
     .info-box {
         background: #F8F9FA;
         border: 1px solid #DEE2E6;
@@ -174,7 +146,17 @@ st.markdown("""
         line-height: 1.6;
     }
     
-    /* Hide Streamlit elements */
+    .auto-calc {
+        background: #E9ECEF;
+        border: 1px dashed #6C757D;
+        border-radius: 6px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        color: #495057;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
@@ -210,6 +192,7 @@ def main():
     
     with col1:
         patient_data = {}
+        antibiotic_data = {}
         
         # Part A: Hospital & Demographics
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
@@ -298,42 +281,82 @@ def main():
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Part D: Antibiotic Exposure
+        # Part D: Antibiotic Exposure (NEW!)
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
         st.markdown('<div class="section-header">Part D: Antibiotic Exposure</div>', unsafe_allow_html=True)
         
         col_g, col_h = st.columns(2)
         with col_g:
-            patient_data['Carbapenem'] = st.radio(
-                "Carbapenem use",
+            antibiotic_data['Fluoroquinolone'] = st.radio(
+                "Fluoroquinolone",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
-                key="carbapenem"
+                key="fluoro"
             )
-            patient_data['Aminoglycoside'] = st.radio(
-                "Aminoglycoside use",
+            antibiotic_data['Cephalosporin'] = st.radio(
+                "Cephalosporin",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="ceph"
+            )
+            antibiotic_data['Carbapenem'] = st.radio(
+                "Carbapenem",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="carbap"
+            )
+        with col_h:
+            antibiotic_data['β-lactam/β-lactamase inhibitor'] = st.radio(
+                "β-lactam/β-lactamase inhibitor",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="beta_lactam"
+            )
+            antibiotic_data['Aminoglycoside'] = st.radio(
+                "Aminoglycoside",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="amino"
             )
-        with col_h:
-            patient_data['Antibiotic_Risk'] = st.number_input(
-                "Antibiotic Risk Score",
-                min_value=0, max_value=10, value=2
-            )
+        
+        # Auto-calculated Antibiotic Risk Score
+        antibiotic_risk_score = sum(antibiotic_data.values())
+        st.markdown(f'<div class="auto-calc">Antibiotic Risk Score: <strong>{antibiotic_risk_score}</strong> (auto-calculated)</div>', unsafe_allow_html=True)
+        
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Calculate button
         if st.button("Calculate CPE Risk", key="calc_btn"):
-            input_df = pd.DataFrame([patient_data])
+            # Prepare data for model (convert UI input to model format)
+            model_input = {
+                'Hospital days before ICU admission': patient_data['Hospital days before ICU admission'],
+                'ESRD on renal replacement therapy': patient_data['ESRD on renal replacement therapy'],
+                'Steroid use': patient_data['Steroid use'],
+                'Central venous catheter': patient_data['Central venous catheter'],
+                'Nasogastric tube': patient_data['Nasogastric tube'],
+                'Biliary drain': patient_data['Biliary drain'],
+                'Carbapenem': antibiotic_data['Carbapenem'],  # Individual value
+                'Aminoglycoside': antibiotic_data['Aminoglycoside'],  # Individual value
+                'Admission to long-term care facility': patient_data['Admission to long-term care facility'],
+                'VRE': patient_data['VRE'],
+                'Endoscopy': patient_data['Endoscopy'],
+                'Antibiotic_Risk': antibiotic_risk_score  # Calculated sum
+            }
+            
+            input_df = pd.DataFrame([model_input])
             input_df = input_df[features]
             
             try:
                 probability = model.predict_proba(input_df)[0, 1]
                 st.session_state.probability = probability
                 st.session_state.show_result = True
+                st.session_state.antibiotic_breakdown = antibiotic_data
+                st.session_state.antibiotic_total = antibiotic_risk_score
             except Exception as e:
                 st.error(f"Prediction error: {str(e)}")
     
@@ -370,7 +393,21 @@ def main():
             </div>
             ''', unsafe_allow_html=True)
             
-            # Additional metrics
+            # Antibiotic breakdown
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">Antibiotic Profile</div>', unsafe_allow_html=True)
+            antibiotic_breakdown = st.session_state.antibiotic_breakdown
+            breakdown_text = "<br>".join([f"• <strong>{name}:</strong> {'Yes' if value else 'No'}" 
+                                        for name, value in antibiotic_breakdown.items()])
+            st.markdown(f'''
+            <div class="info-content">
+                {breakdown_text}<br><br>
+                <strong>Total Antibiotic Risk Score: {st.session_state.antibiotic_total}</strong>
+            </div>
+            ''', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Model performance
             st.markdown('<div class="info-box">', unsafe_allow_html=True)
             st.markdown('<div class="info-title">Model Performance</div>', unsafe_allow_html=True)
             st.markdown(f'''
@@ -395,7 +432,9 @@ def main():
                 <strong>Algorithm:</strong> Logistic Regression<br>
                 <strong>Features:</strong> 12 clinical variables<br>
                 <strong>Validation:</strong> Temporal validation (2022→2023)<br>
-                <strong>Performance:</strong> ROC-AUC 0.774
+                <strong>Performance:</strong> ROC-AUC 0.774<br><br>
+                
+                <em>Antibiotic Risk Score is automatically calculated from individual antibiotic exposures.</em>
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
