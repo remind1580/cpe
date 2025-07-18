@@ -31,23 +31,23 @@ st.markdown("""
         font-weight: 600;
         color: #1a365d;
         text-align: center;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
         font-style: italic;
         letter-spacing: -0.01em;
         line-height: 1.2;
     }
     
-    /* Section boxes with more spacing */
+    /* Section boxes with reduced spacing */
     .section-box {
         background: #FFFFFF;
         border: 2px solid #E5E7EB;
         border-radius: 12px;
-        padding: 3rem;
-        margin: 2.5rem 0;
+        padding: 2rem;
+        margin: 1rem 0;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
     
-    /* Elegant section headers with italic */
+    /* Elegant section headers */
     .section-header {
         font-family: 'Lato', sans-serif;
         font-size: 2.2rem;
@@ -56,40 +56,42 @@ st.markdown("""
         font-style: italic;
         text-transform: capitalize;
         letter-spacing: 0.3px;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
         border-bottom: 3px solid #3B82F6;
     }
     
-    /* Large radio button labels with italic */
+    /* Large radio button labels - combined with description */
     .stRadio > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.6rem !important;        /* 1.4rem → 1.6rem */
-        font-weight: 600 !important;         /* 500 → 600 더 진하게 */
-        color: #000000 !important;           /* #1F2937 → #000000 순검정 */
-        margin-bottom: 1rem !important;
-        line-height: 1.6 !important;
-        font-style: normal !important;       /* italic 제거 */
+        font-size: 1.4rem !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.5 !important;
+        font-style: normal !important;
     }
     
-    /* Enhanced radio buttons with more spacing */
+    /* Enhanced radio buttons with larger text */
     .stRadio > div {
         flex-direction: row !important;
-        gap: 3rem !important;
-        margin-top: 1rem !important;
-        margin-bottom: 2rem !important;
+        gap: 2rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 1rem !important;
     }
     
     .stRadio > div > label {
         background-color: #F9FAFB !important;
-        border: 3px solid #D1D5DB !important;    /* 2px → 3px */
-        border-radius: 10px !important;          /* 8px → 10px */
-        padding: 1.2rem 2.5rem !important;       /* 1rem 2rem → 1.2rem 2.5rem */
+        border: 3px solid #D1D5DB !important;
+        border-radius: 10px !important;
+        padding: 1rem 2rem !important;
         margin: 0 !important;
         cursor: pointer !important;
         transition: all 0.2s !important;
-        font-size: 1.4rem !important;            /* 1.2rem → 1.4rem */
-        font-weight: 700 !important;             /* 600 → 700 */
+        font-size: 1.3rem !important;
+        font-weight: 700 !important;
+        min-width: 80px !important;
+        text-align: center !important;
     }
     
     .stRadio > div > label:hover {
@@ -108,12 +110,12 @@ st.markdown("""
     /* Large number input labels */
     .stNumberInput > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.6rem !important;        /* 1.4rem → 1.6rem */
-        font-weight: 600 !important;         /* 500 → 600 */
-        color: #000000 !important;           /* 순검정 */
-        line-height: 1.6 !important;
-        font-style: normal !important;       /* italic 제거 */
-        margin-bottom: 1rem !important;
+        font-size: 1.4rem !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        line-height: 1.5 !important;
+        font-style: normal !important;
+        margin-bottom: 0.5rem !important;
     }
     
     .stNumberInput > div > div > input {
@@ -128,28 +130,6 @@ st.markdown("""
     .stNumberInput > div > div > input:focus {
         border-color: #3B82F6 !important;
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-    }
-    
-    /* Time frame indicators - larger */
-    .time-frame {
-        font-size: 1.2rem;                       /* 1rem → 1.2rem */
-        color: #374151;                          /* #6B7280 → #374151 더 진하게 */
-        font-style: italic;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        font-family: 'Lato', sans-serif;
-        font-weight: 500;     
-    }
-    
-    /* Drug examples - larger */
-    .drug-examples {
-        font-size: 1.1rem;                       /* 0.95rem → 1.1rem */
-        color: #374151;                          /* #4B5563 → #374151 */
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        font-style: italic;
-        font-family: 'Lato', sans-serif;
-        font-weight: 500;      
     }
     
     /* Calculate button */
@@ -182,7 +162,7 @@ st.markdown("""
         color: white;
         border-radius: 12px;
         padding: 3rem;
-        margin: 2.5rem 0;
+        margin: 2rem 0;
         text-align: center;
         box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     }
@@ -210,8 +190,8 @@ st.markdown("""
         background: #F8FAFC;
         border: 2px solid #E2E8F0;
         border-radius: 12px;
-        padding: 2.5rem;
-        margin: 2rem 0;
+        padding: 2rem;
+        margin: 1.5rem 0;
     }
     
     .info-title {
@@ -219,7 +199,7 @@ st.markdown("""
         font-size: 1.8rem;
         font-weight: 600;
         color: #1F2937;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         font-style: italic;
     }
     
@@ -239,7 +219,7 @@ st.markdown("""
         font-size: 1.4rem;
         color: #1E40AF;
         text-align: center;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         font-weight: 600;
         font-family: 'Lato', sans-serif;
     }
@@ -249,8 +229,8 @@ st.markdown("""
         background: #FEF2F2;
         border: 2px solid #F87171;
         border-radius: 8px;
-        padding: 1.5rem;
-        margin: 1.5rem 0;
+        padding: 1rem;
+        margin: 1rem 0;
         color: #B91C1C;
         font-size: 1.1rem;
         font-weight: 500;
@@ -265,8 +245,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Elegant title with italic serif
+# Elegant title
 st.markdown('<h1 class="main-title">CPE (Carbapenemase-producing Enterobacterales) Risk Predictor</h1>', unsafe_allow_html=True)
+
 @st.cache_resource
 def load_model():
     try:
@@ -279,11 +260,9 @@ def load_model():
 def validate_inputs(patient_data, antibiotic_data):
     warnings = []
     
-    # ESRD validation
     if patient_data.get('ESRD on renal replacement therapy') == 0:
         warnings.append("⚠️ Consider if patient truly has no renal replacement therapy")
     
-    # Antibiotic exposure validation
     antibiotic_count = sum(antibiotic_data.values())
     if antibiotic_count >= 4:
         warnings.append("⚠️ High antibiotic exposure detected - please verify")
@@ -314,21 +293,18 @@ def main():
         col_a, col_b = st.columns(2)
         with col_a:
             patient_data['Hospital days before ICU admission'] = st.number_input(
-                "Hospital days before ICU admission", 
-                min_value=0, max_value=100, value=0,
-                help="Number of days hospitalized in this facility before ICU transfer"
+                "Hospital days before ICU admission : Count days from current admission to ICU transfer", 
+                min_value=0, max_value=100, value=0
             )
-            st.markdown('<div class="time-frame">Count days from current admission to ICU transfer</div>', unsafe_allow_html=True)
             
         with col_b:
             patient_data['Admission to long-term care facility'] = st.radio(
-                "Admission from long-term care facility",
+                "Admission from long-term care facility : Nursing home, Long-Term Acute Care, or rehabilitation facility",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="ltc"
             )
-            st.markdown('<div class="time-frame">Nursing home, Long-Term Acute Care, or rehabilitation facility</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part B: Medical Conditions & Interventions
@@ -338,131 +314,117 @@ def main():
         col_c, col_d = st.columns(2)
         with col_c:
             patient_data['ESRD on renal replacement therapy'] = st.radio(
-                "ESRD on renal replacement therapy",
+                "ESRD on renal replacement therapy : Dialysis or CRRT required",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="esrd"
             )
-            st.markdown('<div class="time-frame">Dialysis or CRRT required</div>', unsafe_allow_html=True)
             
             patient_data['VRE'] = st.radio(
-                "VRE colonization",
+                "VRE colonization : Previous VRE colonization (any time)",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="vre"
             )
-            st.markdown('<div class="time-frame">Previous VRE colonization (any time)</div>', unsafe_allow_html=True)
             
         with col_d:
             patient_data['Steroid use'] = st.radio(
-                "Steroid use",
+                "Steroid use : Systemic corticosteroids within 3 months",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="steroid"
             )
-            st.markdown('<div class="time-frame">Systemic corticosteroids within 3 months</div>', unsafe_allow_html=True)
             
             patient_data['Endoscopy'] = st.radio(
-                "Recent endoscopy",
+                "Recent endoscopy : Any endoscopic procedure within 30 days",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="endoscopy"
             )
-            st.markdown('<div class="time-frame">Any endoscopic procedure within 30 days</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part C: Invasive Devices
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part C: Invasive Devices</div>', unsafe_allow_html=True)
-        st.markdown('<div class="time-frame" style="margin-bottom: 1rem; font-size: 1rem; color: #6B7280;">⏱️ Within 48 hours of ICU admission</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part C: Invasive Devices (within 48 hours of ICU admission)</div>', unsafe_allow_html=True)
         
         col_e, col_f = st.columns(2)
         with col_e:
             patient_data['Central venous catheter'] = st.radio(
-                "Central venous catheter",
+                "Central venous catheter : Subclavian, jugular, femoral line",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="cvc"
             )
-            st.markdown('<div class="drug-examples">Subclavian, jugular, femoral line</div>', unsafe_allow_html=True)
             
             patient_data['Nasogastric tube'] = st.radio(
-                "Nasogastric tube",
+                "Nasogastric tube : NG tube or OG tube placement",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="ngt"
             )
-            st.markdown('<div class="drug-examples">NG tube or OG tube placement</div>', unsafe_allow_html=True)
             
         with col_f:
             patient_data['Biliary drain'] = st.radio(
-                "Biliary drain",
+                "Biliary drain : PTBD, ERCP stent, drainage procedures",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="biliary"
             )
-            st.markdown('<div class="drug-examples">PTBD, ERCP stent, drainage procedures</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part D: Antibiotic Exposure
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part D: Antibiotic Exposure</div>', unsafe_allow_html=True)
-        st.markdown('<div class="time-frame" style="margin-bottom: 1.5rem; font-size: 1rem; color: #6B7280;">⏱️ Within 3 months before ICU admission</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part D: Antibiotic Exposure (within 3 months before ICU admission)</div>', unsafe_allow_html=True)
         
         col_g, col_h = st.columns(2)
         with col_g:
             antibiotic_data['Fluoroquinolone'] = st.radio(
-                "Fluoroquinolone",
+                "Fluoroquinolone : Ciprofloxacin, Levofloxacin, Moxifloxacin",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="fluoro"
             )
-            st.markdown('<div class="drug-examples">Ciprofloxacin, Levofloxacin, Moxifloxacin</div>', unsafe_allow_html=True)
             
             antibiotic_data['Cephalosporin'] = st.radio(
-                "Cephalosporin",
+                "Cephalosporin : Ceftriaxone, Cefazolin, Ceftazidime, Cefepime",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="ceph"
             )
-            st.markdown('<div class="drug-examples">Ceftriaxone, Cefazolin, Ceftazidime, Cefepime</div>', unsafe_allow_html=True)
             
             antibiotic_data['Carbapenem'] = st.radio(
-                "Carbapenem",
+                "Carbapenem : Meropenem, Imipenem, Ertapenem, Doripenem",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="carbap"
             )
-            st.markdown('<div class="drug-examples">Meropenem, Imipenem, Ertapenem, Doripenem</div>', unsafe_allow_html=True)
             
         with col_h:
             antibiotic_data['β-lactam/β-lactamase inhibitor'] = st.radio(
-                "β-lactam/β-lactamase inhibitor",
+                "β-lactam/β-lactamase inhibitor : Piperacillin/Tazobactam, Ampicillin/Sulbactam",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="beta_lactam"
             )
-            st.markdown('<div class="drug-examples">Piperacillin/Tazobactam, Ampicillin/Sulbactam</div>', unsafe_allow_html=True)
             
             antibiotic_data['Aminoglycoside'] = st.radio(
-                "Aminoglycoside",
+                "Aminoglycoside : Gentamicin, Amikacin, Tobramycin",
                 [0, 1],
                 format_func=lambda x: "Yes" if x else "No",
                 horizontal=True,
                 key="amino"
             )
-            st.markdown('<div class="drug-examples">Gentamicin, Amikacin, Tobramycin</div>', unsafe_allow_html=True)
         
         # Auto-calculated Antibiotic Risk Score
         antibiotic_risk_score = sum(antibiotic_data.values())
