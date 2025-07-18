@@ -12,185 +12,179 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Paper-optimized styling
+# MDCalc style CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
-    /* Clean paper background */
+    /* Clean MDCalc background */
     .stApp {
-        background-color: #FFFFFF;
+        background-color: #F8F9FA;
         font-family: 'Inter', sans-serif;
-        color: #000000;
-        padding: 2rem 0;
+        color: #333333;
     }
     
-    /* Large main title for paper */
+    /* Main title */
     .main-title {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         font-weight: 700;
-        color: #000000;
-        text-align: center;
-        margin-bottom: 3rem;
-        letter-spacing: -0.02em;
+        color: #333333;
+        margin-bottom: 1rem;
     }
     
-    /* Remove all card borders */
-    .main-container {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: 0;
+    .subtitle {
+        font-size: 1.1rem;
+        color: #666666;
+        margin-bottom: 2rem;
+        font-style: italic;
     }
     
-    /* Large section headers - same size as title */
-    .large-section-header {
-        font-size: 3.5rem;
-        font-weight: 700;
-        color: #000000;
-        margin: 2rem 0 1.5rem 0;
-        letter-spacing: -0.02em;
+    /* Section boxes like MDCalc */
+    .section-box {
+        background: #FFFFFF;
+        border: 1px solid #E1E5E9;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     
-    /* Medium subsection headers */
-    .medium-subsection-header {
-        font-size: 2rem;
+    /* Section headers */
+    .section-header {
+        font-size: 1.5rem;
         font-weight: 600;
-        color: #000000;
-        margin: 2rem 0 1rem 0;
+        color: #333333;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #E1E5E9;
     }
     
-    /* Large input labels */
-    .stSelectbox > label, .stNumberInput > label {
-        font-size: 1.5rem !important;
+    /* Radio button styling */
+    .stRadio > label {
+        font-size: 1.1rem !important;
         font-weight: 500 !important;
-        color: #000000 !important;
-        margin-bottom: 0.75rem !important;
+        color: #333333 !important;
+        margin-bottom: 0.5rem !important;
     }
     
-    /* Clean input styling - no boxes */
-    .stSelectbox > div > div {
-        background: transparent;
-        border: 2px solid #000000;
-        border-radius: 0;
-        font-size: 1.25rem;
-        padding: 0.75rem;
+    .stRadio > div {
+        flex-direction: row !important;
+        gap: 2rem !important;
+    }
+    
+    .stRadio > div > label {
+        background-color: #F8F9FA !important;
+        border: 1px solid #DEE2E6 !important;
+        border-radius: 6px !important;
+        padding: 0.5rem 1rem !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        transition: all 0.2s !important;
+    }
+    
+    .stRadio > div > label:hover {
+        background-color: #E9ECEF !important;
+        border-color: #ADB5BD !important;
+    }
+    
+    .stRadio > div > label[data-checked="true"] {
+        background-color: #007BFF !important;
+        border-color: #007BFF !important;
+        color: white !important;
+    }
+    
+    /* Number input styling */
+    .stNumberInput > label {
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+        color: #333333 !important;
     }
     
     .stNumberInput > div > div > input {
-        background: transparent;
-        border: 2px solid #000000;
-        border-radius: 0;
-        font-size: 1.25rem;
-        padding: 0.75rem;
-        color: #000000;
+        border: 1px solid #DEE2E6 !important;
+        border-radius: 6px !important;
+        padding: 0.5rem !important;
+        font-size: 1rem !important;
     }
     
-    /* Large primary button */
-    .stButton > button {
-        background: #000000;
-        color: #FFFFFF;
-        border: 2px solid #000000;
-        border-radius: 0;
-        padding: 1.5rem 4rem;
-        font-size: 1.5rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        transition: all 0.2s;
+    /* Calculate button like MDCalc */
+    .calculate-button {
+        background: #28A745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        font-weight: 600;
         width: 100%;
+        margin: 2rem 0;
+        cursor: pointer;
+        transition: all 0.2s;
     }
     
-    .stButton > button:hover {
-        background: #333333;
-        border-color: #333333;
+    .calculate-button:hover {
+        background: #218838;
     }
     
-    /* Clean gauge container */
-    .gauge-container {
-        background: #F8F9FA;
-        border: 2px solid #000000;
+    /* Results box like MDCalc */
+    .results-box {
+        background: #28A745;
+        color: white;
+        border-radius: 8px;
         padding: 2rem;
         margin: 2rem 0;
         text-align: center;
     }
     
-    /* Large metrics */
-    .metric-large {
-        font-size: 1.75rem;
+    .results-title {
+        font-size: 1.5rem;
         font-weight: 600;
-        color: #000000;
-        margin: 1rem 0;
-        text-align: center;
+        margin-bottom: 1rem;
     }
     
-    /* Risk levels - large and clear */
-    .risk-high { 
-        color: #DC2626; 
-        font-weight: 700;
-        font-size: 2rem;
-        text-align: center;
-        margin: 2rem 0;
+    .results-content {
+        font-size: 1.2rem;
+        line-height: 1.6;
     }
-    .risk-medium { 
-        color: #D97706; 
-        font-weight: 700;
-        font-size: 2rem;
-        text-align: center;
-        margin: 2rem 0;
-    }
-    .risk-low { 
-        color: #059669; 
-        font-weight: 700;
-        font-size: 2rem;
-        text-align: center;
-        margin: 2rem 0;
-    }
+    
+    /* Risk levels */
+    .risk-high .results-box { background: #DC3545; }
+    .risk-medium .results-box { background: #FD7E14; }
+    .risk-low .results-box { background: #28A745; }
     
     /* Model info box */
-    .model-info-box {
-        background: #F1F5F9;
-        border: 2px solid #000000;
-        padding: 2rem;
-        margin: 2rem 0;
+    .info-box {
+        background: #F8F9FA;
+        border: 1px solid #DEE2E6;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
     }
     
-    .model-info-box h3 {
-        font-size: 1.75rem;
-        font-weight: 700;
+    .info-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333333;
         margin-bottom: 1rem;
-        color: #000000;
     }
     
-    .model-info-box ul {
-        margin: 0;
-        padding-left: 2rem;
-    }
-    
-    .model-info-box li {
-        font-size: 1.25rem;
-        line-height: 1.8;
-        color: #000000;
-        margin: 0.5rem 0;
+    .info-content {
+        font-size: 1rem;
+        color: #666666;
+        line-height: 1.6;
     }
     
     /* Hide Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
-    header {visibility: hidden;}
-    
-    /* Remove default streamlit padding */
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
     
 </style>
 """, unsafe_allow_html=True)
 
-# Large title
+# Title
 st.markdown('<h1 class="main-title">CPE Risk Predictor</h1>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Machine learning model for predicting CPE colonization risk in ICU patients</p>', unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model():
@@ -200,64 +194,6 @@ def load_model():
     except Exception as e:
         st.error(f"Error loading model: {str(e)}")
         return None
-
-def create_paper_gauge(probability, threshold=0.45):
-    if probability >= threshold:
-        risk_level = "HIGH RISK"
-        color = "#DC2626"
-    elif probability >= 0.3:
-        risk_level = "MODERATE RISK"
-        color = "#D97706"
-    else:
-        risk_level = "LOW RISK"
-        color = "#059669"
-    
-    fig = go.Figure(go.Indicator(
-        mode = "gauge+number",
-        value = probability * 100,
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {
-            'text': f"<b style='color:{color}; font-size:28px;'>{risk_level}</b>",
-            'font': {'size': 24}
-        },
-        number = {
-            'font': {'size': 60, 'color': color, 'family': 'Inter'}, 
-            'suffix': '%',
-            'valueformat': '.1f'
-        },
-        gauge = {
-            'axis': {
-                'range': [None, 100], 
-                'tickcolor': "#000000", 
-                'tickfont': {'size': 16, 'color': '#000000', 'family': 'Inter'},
-                'tickwidth': 2
-            },
-            'bar': {'color': color, 'thickness': 0.6},
-            'bgcolor': "#FFFFFF",
-            'borderwidth': 3,
-            'bordercolor': "#000000",
-            'steps': [
-                {'range': [0, 30], 'color': "#E5F7E5"},
-                {'range': [30, 45], 'color': "#FFF3E0"},
-                {'range': [45, 100], 'color': "#FFEBEE"}
-            ],
-            'threshold': {
-                'line': {'color': "#000000", 'width': 4},
-                'thickness': 0.8,
-                'value': threshold * 100
-            }
-        }
-    ))
-    
-    fig.update_layout(
-        paper_bgcolor="white",
-        plot_bgcolor="white",
-        font_color="#000000",
-        font_family="Inter",
-        height=400,
-        margin=dict(l=20, r=20, t=80, b=20)
-    )
-    return fig
 
 def main():
     model_data = load_model()
@@ -270,16 +206,15 @@ def main():
     features = model_data['features']
     
     # Main layout
-    col1, col2 = st.columns([3, 2], gap="large")
+    col1, col2 = st.columns([2, 1], gap="large")
     
     with col1:
-        # Large section header
-        st.markdown('<div class="large-section-header">📋 Patient Clinical Information</div>', unsafe_allow_html=True)
-        
         patient_data = {}
         
-        # Hospital & Care Settings
-        st.markdown('<div class="medium-subsection-header">🏥 Hospital & Care Settings</div>', unsafe_allow_html=True)
+        # Part A: Hospital & Demographics
+        st.markdown('<div class="section-box">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part A: Hospital & Demographics</div>', unsafe_allow_html=True)
+        
         col_a, col_b = st.columns(2)
         with col_a:
             patient_data['Hospital days before ICU admission'] = st.number_input(
@@ -287,82 +222,111 @@ def main():
                 min_value=0, max_value=100, value=5
             )
         with col_b:
-            patient_data['Admission to long-term care facility'] = st.selectbox(
-                "Admission from long-term care facility", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Admission to long-term care facility'] = st.radio(
+                "Admission from long-term care facility",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="ltc"
             )
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Medical Conditions  
-        st.markdown('<div class="medium-subsection-header">🩺 Medical Conditions</div>', unsafe_allow_html=True)
+        # Part B: Medical Conditions
+        st.markdown('<div class="section-box">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part B: Medical Conditions</div>', unsafe_allow_html=True)
+        
         col_c, col_d = st.columns(2)
         with col_c:
-            patient_data['ESRD on renal replacement therapy'] = st.selectbox(
-                "ESRD on renal replacement therapy", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['ESRD on renal replacement therapy'] = st.radio(
+                "ESRD on renal replacement therapy",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="esrd"
             )
-            patient_data['VRE'] = st.selectbox(
-                "VRE colonization", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['VRE'] = st.radio(
+                "VRE colonization",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="vre"
             )
         with col_d:
-            patient_data['Steroid use'] = st.selectbox(
-                "Steroid use", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Steroid use'] = st.radio(
+                "Steroid use",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="steroid"
             )
-            patient_data['Endoscopy'] = st.selectbox(
-                "Recent endoscopy", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Endoscopy'] = st.radio(
+                "Recent endoscopy",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="endoscopy"
             )
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Invasive Devices
-        st.markdown('<div class="medium-subsection-header">🔌 Invasive Devices</div>', unsafe_allow_html=True)
+        # Part C: Invasive Devices
+        st.markdown('<div class="section-box">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part C: Invasive Devices</div>', unsafe_allow_html=True)
+        
         col_e, col_f = st.columns(2)
         with col_e:
-            patient_data['Central venous catheter'] = st.selectbox(
-                "Central venous catheter", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Central venous catheter'] = st.radio(
+                "Central venous catheter",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="cvc"
             )
-            patient_data['Nasogastric tube'] = st.selectbox(
-                "Nasogastric tube", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Nasogastric tube'] = st.radio(
+                "Nasogastric tube",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="ngt"
             )
         with col_f:
-            patient_data['Biliary drain'] = st.selectbox(
-                "Biliary drain", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Biliary drain'] = st.radio(
+                "Biliary drain",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="biliary"
             )
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Antibiotic Exposure
-        st.markdown('<div class="medium-subsection-header">💊 Antibiotic Exposure</div>', unsafe_allow_html=True)
+        # Part D: Antibiotic Exposure
+        st.markdown('<div class="section-box">', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part D: Antibiotic Exposure</div>', unsafe_allow_html=True)
+        
         col_g, col_h = st.columns(2)
         with col_g:
-            patient_data['Carbapenem'] = st.selectbox(
-                "Carbapenem use", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Carbapenem'] = st.radio(
+                "Carbapenem use",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="carbapenem"
             )
-            patient_data['Aminoglycoside'] = st.selectbox(
-                "Aminoglycoside use", 
-                [0, 1], 
-                format_func=lambda x: "Yes" if x else "No"
+            patient_data['Aminoglycoside'] = st.radio(
+                "Aminoglycoside use",
+                [0, 1],
+                format_func=lambda x: "Yes" if x else "No",
+                horizontal=True,
+                key="amino"
             )
         with col_h:
             patient_data['Antibiotic_Risk'] = st.number_input(
-                "Antibiotic Risk Score", 
+                "Antibiotic Risk Score",
                 min_value=0, max_value=10, value=2
             )
+        st.markdown('</div>', unsafe_allow_html=True)
         
         # Calculate button
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        if st.button("Calculate CPE Risk"):
+        if st.button("Calculate CPE Risk", key="calc_btn"):
             input_df = pd.DataFrame([patient_data])
             input_df = input_df[features]
             
@@ -370,51 +334,70 @@ def main():
                 probability = model.predict_proba(input_df)[0, 1]
                 st.session_state.probability = probability
                 st.session_state.show_result = True
-                st.success("✅ Risk assessment completed!")
             except Exception as e:
                 st.error(f"Prediction error: {str(e)}")
     
     with col2:
-        # Large section header
-        st.markdown('<div class="large-section-header">📊 Risk Assessment</div>', unsafe_allow_html=True)
-        
+        # Results section
         if hasattr(st.session_state, 'show_result') and st.session_state.show_result:
             probability = st.session_state.probability
             
-            # Large gauge chart
-            st.markdown('<div class="gauge-container">', unsafe_allow_html=True)
-            fig = create_paper_gauge(probability)
-            st.plotly_chart(fig, use_container_width=True)
+            # Determine risk level
+            if probability >= 0.45:
+                risk_class = "risk-high"
+                risk_text = "HIGH RISK"
+                recommendation = "Consider CPE isolation precautions and targeted screening"
+            elif probability >= 0.3:
+                risk_class = "risk-medium"
+                risk_text = "MODERATE RISK"
+                recommendation = "Enhanced monitoring and standard infection control measures"
+            else:
+                risk_class = "risk-low"
+                risk_text = "LOW RISK"
+                recommendation = "Standard care protocols appropriate"
+            
+            # Results box like MDCalc
+            st.markdown(f'''
+            <div class="{risk_class}">
+                <div class="results-box">
+                    <div class="results-title">CPE Risk Assessment</div>
+                    <div class="results-content">
+                        <strong>{risk_text}</strong><br>
+                        Risk Probability: <strong>{probability*100:.1f}%</strong><br><br>
+                        {recommendation}
+                    </div>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            
+            # Additional metrics
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">Model Performance</div>', unsafe_allow_html=True)
+            st.markdown(f'''
+            <div class="info-content">
+                • <strong>Model Threshold:</strong> 45.0%<br>
+                • <strong>ROC-AUC:</strong> 0.774<br>
+                • <strong>Sensitivity:</strong> 72.5%<br>
+                • <strong>Specificity:</strong> 68.9%<br>
+                • <strong>Training Data:</strong> 3,932 patients
+            </div>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
             
-            # Large metrics
-            st.markdown(f'<div class="metric-large">Risk Probability: <strong>{probability*100:.1f}%</strong></div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="metric-large">Model Threshold: <strong>45.0%</strong></div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="metric-large">ROC-AUC: <strong>0.774</strong></div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="metric-large">Sensitivity: <strong>72.5%</strong></div>', unsafe_allow_html=True)
-            
-            # Clinical recommendation
-            if probability >= 0.45:
-                st.markdown('<div class="risk-high">⚠️ HIGH RISK<br>Consider CPE isolation precautions</div>', unsafe_allow_html=True)
-            elif probability >= 0.3:
-                st.markdown('<div class="risk-medium">⚡ MODERATE RISK<br>Enhanced monitoring recommended</div>', unsafe_allow_html=True)
-            else:
-                st.markdown('<div class="risk-low">✅ LOW RISK<br>Standard care protocols</div>', unsafe_allow_html=True)
         else:
-            # Model information box
-            st.markdown('<div class="model-info-box">', unsafe_allow_html=True)
-            st.markdown('<h3>🤖 Model Information</h3>', unsafe_allow_html=True)
-            st.markdown("""
-            <ul>
-                <li><strong>Algorithm:</strong> Logistic Regression</li>
-                <li><strong>Features:</strong> 12 clinical variables</li>
-                <li><strong>ROC-AUC:</strong> 0.774</li>
-                <li><strong>Sensitivity:</strong> 72.5%</li>
-                <li><strong>Specificity:</strong> 68.9%</li>
-                <li><strong>Training Data:</strong> 3,932 patients</li>
-                <li><strong>Validation:</strong> Temporal (2022→2023)</li>
-            </ul>
-            """, unsafe_allow_html=True)
+            # Model information
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">About This Calculator</div>', unsafe_allow_html=True)
+            st.markdown('''
+            <div class="info-content">
+                This machine learning model predicts the risk of CPE (Carbapenem-resistant Enterobacteriaceae) colonization in ICU patients based on clinical variables.<br><br>
+                
+                <strong>Algorithm:</strong> Logistic Regression<br>
+                <strong>Features:</strong> 12 clinical variables<br>
+                <strong>Validation:</strong> Temporal validation (2022→2023)<br>
+                <strong>Performance:</strong> ROC-AUC 0.774
+            </div>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
