@@ -445,4 +445,118 @@ def main():
             st.markdown('<div class="drug-examples">Gentamicin, Amikacin, Tobramycin</div>', unsafe_allow_html=True)
         
         # Auto-calculated Antibiotic Risk Score
-        antibiotic_risk_score = sum(antibi
+        antibiotic_risk_score = sum(antibiotic_data.values())
+        st.markdown(f'<div class="auto-calc">📊 Antibiotic Risk Score: <strong>{antibiotic_risk_score}</strong> (auto-calculated)</div>', unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Validation warnings
+        warnings = validate_inputs(patient_data, antibiotic_data)
+        for warning in warnings:
+            st.markdown(f'<div class="validation-warning">{warning}</div>', unsafe_allow_html=True)
+        
+        # Calculate button
+        if st.button("🔬 Calculate CPE Risk", key="calc_btn"):
+            # Prepare data for model
+            model_input = {
+                'Hospital days before ICU admission': patient_data['Hospital days before ICU admission'],
+                'ESRD on renal replacement therapy': patient_data['ESRD on renal replacement therapy'],
+                'Steroid use': patient_data['Steroid use'],
+                'Central venous catheter': patient_data['Central venous catheter'],
+                'Nasogastric tube': patient_data['Nasogastric tube'],
+                'Biliary drain': patient_data['Biliary drain'],
+                'Carbapenem': antibiotic_data['Carbapenem'],
+                'Aminoglycoside': antibiotic_data['Aminoglycoside'],
+                'Admission to long-term care facility': patient_data['Admission to long-term care facility'],
+                'VRE': patient_data['VRE'],
+                'Endoscopy': patient_data['Endoscopy'],
+                'Antibiotic_Risk': antibiotic_risk_score
+            }
+            
+            input_df = pd.DataFrame([model_input])
+            input_df = input_df[features]
+            
+            try:
+                probability = model.predict_proba(input_df)[0, 1]
+                st.session_state.probability = probability
+                st.session_state.show_result = True
+                st.session_state.antibiotic_breakdown = antibiotic_data
+                st.session_state.antibiotic_total = antibiotic_risk_score
+                st.success("✅ Risk assessment completed!")
+            except Exception as e:
+                st.error(f"Prediction error: {str(e)}")
+    
+    with col2:
+        # Results section
+        if hasattr(st.session_state, 'show_result') and st.session_state.show_result:
+            probability = st.session_state.probability
+            
+            # Determine risk level
+            if probability >= 0.45:
+                risk_class = "risk-high"
+                risk_text = "HIGH RISK"
+                recommendation = "Consider CPE isolation precautions and targeted screening"
+            elif probability >= 0.3:
+                risk_class = "risk-medium"
+                risk_text = "MODERATE RISK"
+                recommendation = "Enhanced monitoring and standard infection control measures"
+            else:
+                risk_class = "risk-low"
+                risk_text = "LOW RISK"
+                recommendation = "Standard care protocols appropriate"
+            
+            # Results box
+            st.markdown(f'''
+            <div class="{risk_class}">
+                <div class="results-box">
+                    <div class="results-title">🎯 CPE Risk Assessment</div>
+                    <div class="results-content">
+                        <strong>{risk_text}</strong><br>
+                        Risk Probability: <strong>{probability*100:.1f}%</strong><br><br>
+                        {recommendation}
+                    </div>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            
+            # Model performance
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">📊 Model Performance</div>', unsafe_allow_html=True)
+            st.markdown(f'''
+            <div class="info-content">
+                <strong>Sensitivity:</strong> 62% (detects 62% of CPE carriers)<br>
+                <strong>ROC-AUC:</strong> 0.71 (good discrimination)<br>
+                <strong>Model Threshold:</strong> 45%<br>
+                <strong>Validation:</strong> 2,923 ICU patients (2023)<br>
+                <strong>CPE Prevalence:</strong> 8-11% in ICU patients
+            </div>
+            ''', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+        else:
+            # About this calculator
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">🏥 About This Calculator</div>', unsafe_allow_html=True)
+            st.markdown('''
+            <div class="info-content">
+                <strong>Purpose:</strong> Predicts CPE colonization risk within 48 hours of ICU admission<br><br>
+                
+                <strong>Algorithm:</strong> Logistic Regression with SMOTE<br>
+                <strong>Training Data:</strong> 1,992 ICU admissions (2022)<br>
+                <strong>Validation Data:</strong> 2,923 ICU admissions (2023)<br>
+                <strong>Institution:</strong> Hallym University Sacred Heart Hospital<br><br>
+                
+                <strong>Key Predictors:</strong><br>
+                • Central venous catheter use<br>
+                • Nasogastric tube placement<br>
+                • Prior antibiotic exposure<br>
+                • Long-term care facility admission<br>
+                • Hospital days before ICU<br><br>
+                
+                <em>This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.</em>
+            </div>
+            ''', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
