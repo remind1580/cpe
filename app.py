@@ -64,12 +64,12 @@ st.markdown("""
     /* Large radio button labels with italic */
     .stRadio > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.4rem !important;
-        font-weight: 500 !important;
-        color: #1F2937 !important;
+        font-size: 1.6rem !important;        /* 1.4rem → 1.6rem */
+        font-weight: 600 !important;         /* 500 → 600 더 진하게 */
+        color: #000000 !important;           /* #1F2937 → #000000 순검정 */
         margin-bottom: 1rem !important;
         line-height: 1.6 !important;
-        font-style: italic !important;
+        font-style: normal !important;       /* italic 제거 */
     }
     
     /* Enhanced radio buttons with more spacing */
@@ -82,14 +82,14 @@ st.markdown("""
     
     .stRadio > div > label {
         background-color: #F9FAFB !important;
-        border: 2px solid #D1D5DB !important;
-        border-radius: 8px !important;
-        padding: 1rem 2rem !important;
+        border: 3px solid #D1D5DB !important;    /* 2px → 3px */
+        border-radius: 10px !important;          /* 8px → 10px */
+        padding: 1.2rem 2.5rem !important;       /* 1rem 2rem → 1.2rem 2.5rem */
         margin: 0 !important;
         cursor: pointer !important;
         transition: all 0.2s !important;
-        font-size: 1.2rem !important;
-        font-weight: 600 !important;
+        font-size: 1.4rem !important;            /* 1.2rem → 1.4rem */
+        font-weight: 700 !important;             /* 600 → 700 */
     }
     
     .stRadio > div > label:hover {
@@ -108,11 +108,11 @@ st.markdown("""
     /* Large number input labels */
     .stNumberInput > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.4rem !important;
-        font-weight: 500 !important;
-        color: #1F2937 !important;
+        font-size: 1.6rem !important;        /* 1.4rem → 1.6rem */
+        font-weight: 600 !important;         /* 500 → 600 */
+        color: #000000 !important;           /* 순검정 */
         line-height: 1.6 !important;
-        font-style: italic !important;
+        font-style: normal !important;       /* italic 제거 */
         margin-bottom: 1rem !important;
     }
     
@@ -132,22 +132,24 @@ st.markdown("""
     
     /* Time frame indicators - larger */
     .time-frame {
-        font-size: 1rem;
-        color: #6B7280;
+        font-size: 1.2rem;                       /* 1rem → 1.2rem */
+        color: #374151;                          /* #6B7280 → #374151 더 진하게 */
         font-style: italic;
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         font-family: 'Lato', sans-serif;
+        font-weight: 500;     
     }
     
     /* Drug examples - larger */
     .drug-examples {
-        font-size: 0.95rem;
-        color: #4B5563;
+        font-size: 1.1rem;                       /* 0.95rem → 1.1rem */
+        color: #374151;                          /* #4B5563 → #374151 */
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         font-style: italic;
         font-family: 'Lato', sans-serif;
+        font-weight: 500;      
     }
     
     /* Calculate button */
@@ -326,7 +328,7 @@ def main():
                 horizontal=True,
                 key="ltc"
             )
-            st.markdown('<div class="time-frame">Nursing home, LTAC, or rehabilitation facility</div>', unsafe_allow_html=True)
+            st.markdown('<div class="time-frame">Nursing home, Long-Term Acute Care, or rehabilitation facility</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part B: Medical Conditions & Interventions
