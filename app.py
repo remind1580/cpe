@@ -12,82 +12,83 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Professional medical UI with golden ratio typography
+# Professional medical UI with elegant fonts
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
     
     /* Clean medical background */
     .stApp {
         background-color: #F8F9FA;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Lato', sans-serif;
         color: #1F2937;
     }
     
-    /* Large main title - golden ratio: 2.618 */
+    /* Elegant main title with italic serif */
     .main-title {
-        font-size: 3.2rem;
-        font-weight: 700;
-        color: #1F2937;
-        margin-bottom: 1rem;
+        font-family: 'Crimson Text', serif;
+        font-size: 4rem;
+        font-weight: 600;
+        color: #1a365d;
         text-align: center;
+        margin-bottom: 4rem;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
     }
     
-    /* Large subtitle */
-    .subtitle {
-        font-size: 2.5rem;      
-        color: #000000;
-        margin-bottom: 2.5rem;
-        font-style: normal;
-        text-align: center;
-        font-weight: 500;
-    }
-    
-    /* Section boxes */
+    /* Section boxes with more spacing */
     .section-box {
         background: #FFFFFF;
         border: 2px solid #E5E7EB;
         border-radius: 12px;
-        padding: 2rem;
-        margin: 1.5rem 0;
+        padding: 3rem;
+        margin: 2.5rem 0;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
     
-    /* Large section headers - golden ratio: 1.618 */
+    /* Elegant section headers with italic */
     .section-header {
-        font-size: 2rem;
-        font-weight: 600;
-        color: #1F2937;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2c5282;
+        font-style: italic;
+        text-transform: capitalize;
+        letter-spacing: 0.3px;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
         border-bottom: 3px solid #3B82F6;
     }
     
-    /* Large radio button labels */
+    /* Large radio button labels with italic */
     .stRadio > label {
-        font-size: 1.25rem !important;
+        font-family: 'Lato', sans-serif !important;
+        font-size: 1.4rem !important;
         font-weight: 500 !important;
         color: #1F2937 !important;
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 1rem !important;
         line-height: 1.6 !important;
+        font-style: italic !important;
     }
     
-    /* Enhanced radio buttons */
+    /* Enhanced radio buttons with more spacing */
     .stRadio > div {
         flex-direction: row !important;
-        gap: 2.5rem !important;
-        margin-top: 0.5rem !important;
+        gap: 3rem !important;
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
     }
     
     .stRadio > div > label {
         background-color: #F9FAFB !important;
         border: 2px solid #D1D5DB !important;
         border-radius: 8px !important;
-        padding: 0.75rem 1.5rem !important;
+        padding: 1rem 2rem !important;
         margin: 0 !important;
         cursor: pointer !important;
         transition: all 0.2s !important;
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
         font-weight: 600 !important;
     }
     
@@ -106,18 +107,22 @@ st.markdown("""
     
     /* Large number input labels */
     .stNumberInput > label {
-        font-size: 1.25rem !important;
+        font-family: 'Lato', sans-serif !important;
+        font-size: 1.4rem !important;
         font-weight: 500 !important;
         color: #1F2937 !important;
         line-height: 1.6 !important;
+        font-style: italic !important;
+        margin-bottom: 1rem !important;
     }
     
     .stNumberInput > div > div > input {
         border: 2px solid #D1D5DB !important;
         border-radius: 8px !important;
-        padding: 0.75rem !important;
-        font-size: 1.1rem !important;
+        padding: 1rem !important;
+        font-size: 1.2rem !important;
         background-color: #F9FAFB !important;
+        font-family: 'Lato', sans-serif !important;
     }
     
     .stNumberInput > div > div > input:focus {
@@ -125,20 +130,24 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
     }
     
-    /* Time frame indicators */
+    /* Time frame indicators - larger */
     .time-frame {
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: #6B7280;
         font-style: italic;
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        font-family: 'Lato', sans-serif;
     }
     
-    /* Drug examples */
+    /* Drug examples - larger */
     .drug-examples {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         color: #4B5563;
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
         font-style: italic;
+        font-family: 'Lato', sans-serif;
     }
     
     /* Calculate button */
@@ -147,14 +156,16 @@ st.markdown("""
         color: white !important;
         border: none !important;
         border-radius: 12px !important;
-        padding: 1.25rem 3rem !important;
-        font-size: 1.4rem !important;
+        padding: 1.5rem 4rem !important;
+        font-size: 1.6rem !important;
         font-weight: 700 !important;
         letter-spacing: 0.5px !important;
         transition: all 0.3s !important;
         box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3) !important;
         text-transform: uppercase !important;
         width: 100% !important;
+        font-family: 'Lato', sans-serif !important;
+        margin-top: 2rem !important;
     }
     
     .stButton > button:hover {
@@ -168,20 +179,23 @@ st.markdown("""
         background: #10B981;
         color: white;
         border-radius: 12px;
-        padding: 2.5rem;
-        margin: 2rem 0;
+        padding: 3rem;
+        margin: 2.5rem 0;
         text-align: center;
         box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     }
     
     .results-title {
-        font-size: 1.8rem;
+        font-family: 'Crimson Text', serif;
+        font-size: 2.2rem;
         font-weight: 700;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        font-style: italic;
     }
     
     .results-content {
-        font-size: 1.3rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.5rem;
         line-height: 1.6;
     }
     
@@ -194,19 +208,22 @@ st.markdown("""
         background: #F8FAFC;
         border: 2px solid #E2E8F0;
         border-radius: 12px;
-        padding: 2rem;
-        margin: 1.5rem 0;
+        padding: 2.5rem;
+        margin: 2rem 0;
     }
     
     .info-title {
-        font-size: 1.5rem;
+        font-family: 'Crimson Text', serif;
+        font-size: 1.8rem;
         font-weight: 600;
         color: #1F2937;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        font-style: italic;
     }
     
     .info-content {
-        font-size: 1.1rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.2rem;
         color: #4B5563;
         line-height: 1.7;
     }
@@ -216,12 +233,13 @@ st.markdown("""
         background: linear-gradient(135deg, #EBF8FF, #DBEAFE);
         border: 2px solid #3B82F6;
         border-radius: 10px;
-        padding: 1rem;
-        font-size: 1.2rem;
+        padding: 1.5rem;
+        font-size: 1.4rem;
         color: #1E40AF;
         text-align: center;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
         font-weight: 600;
+        font-family: 'Lato', sans-serif;
     }
     
     /* Validation warnings */
@@ -229,11 +247,12 @@ st.markdown("""
         background: #FEF2F2;
         border: 2px solid #F87171;
         border-radius: 8px;
-        padding: 1rem;
-        margin: 1rem 0;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
         color: #B91C1C;
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 500;
+        font-family: 'Lato', sans-serif;
     }
     
     /* Hide Streamlit elements */
@@ -244,9 +263,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Large title
+# Elegant title with italic serif
 st.markdown('<h1 class="main-title">CPE (Carbapenemase-producing Enterobacterales) Risk Predictor</h1>', unsafe_allow_html=True)
-
 @st.cache_resource
 def load_model():
     try:
