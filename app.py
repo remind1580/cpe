@@ -246,7 +246,17 @@ st.markdown("""
 
 # Large title
 st.markdown('<h1 class="main-title">CPE Risk Predictor</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Machine learning model for predicting carbapenemase-producing Enterobacterales (CPE) colonization at ICU admission</p>', unsafe_allow_html=True)
+st.markdown('''
+<p style="
+    font-size: 2.5rem; 
+    color: #000000; 
+    margin-bottom: 2.5rem; 
+    font-style: normal; 
+    text-align: center; 
+    font-weight: 500;
+    font-family: Inter, sans-serif;
+">Machine learning model for predicting carbapenemase-producing Enterobacterales (CPE) colonization at ICU admission</p>
+''', unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model():
