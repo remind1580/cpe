@@ -61,7 +61,8 @@ st.markdown("""
         border-bottom: 3px solid #3B82F6;
     }
     
-    /* #2 개선: 더 큰 라디오 버튼 레이블 (질문 텍스트) */
+    /* #2 개선: 더 큰 라디오 버튼 레이블 (질문 텍스트) - 더 구체적인 선택자 */
+    div[data-testid="stRadio"] > label,
     .stRadio > label {
         font-family: 'Lato', sans-serif !important;
         font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
@@ -70,9 +71,20 @@ st.markdown("""
         margin-bottom: 0.8rem !important;
         line-height: 1.5 !important;
         font-style: normal !important;
+        display: block !important;
+    }
+    
+    /* Streamlit 내부 p 태그 스타일 오버라이드 */
+    div[data-testid="stRadio"] > label > div > p,
+    .stRadio > label > div > p {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
+        margin: 0 !important;
     }
     
     /* Enhanced radio buttons with larger text */
+    div[data-testid="stRadio"] > div[role="radiogroup"],
     .stRadio > div {
         flex-direction: row !important;
         gap: 2.5rem !important;  /* 2rem → 2.5rem */
@@ -80,7 +92,8 @@ st.markdown("""
         margin-bottom: 1.5rem !important;  /* 1rem → 1.5rem */
     }
     
-    /* #1 개선: Yes/No 버튼 크기 증가 */
+    /* #1 개선: Yes/No 버튼 크기 증가 - 더 구체적인 선택자 */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label,
     .stRadio > div > label {
         background-color: #F9FAFB !important;
         border: 3px solid #D1D5DB !important;
@@ -95,12 +108,21 @@ st.markdown("""
         text-align: center !important;
     }
     
+    /* Yes/No 텍스트를 더 크게 - span 태그 직접 타겟팅 */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label > div > p,
+    .stRadio > div > label span {
+        font-size: 1.8rem !important;
+        font-weight: 800 !important;
+    }
+    
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:hover,
     .stRadio > div > label:hover {
         background-color: #EBF4FF !important;
         border-color: #3B82F6 !important;
         transform: translateY(-2px) !important;  /* -1px → -2px */
     }
     
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label[data-checked="true"],
     .stRadio > div > label[data-checked="true"] {
         background-color: #3B82F6 !important;
         border-color: #3B82F6 !important;
@@ -108,7 +130,8 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
     }
     
-    /* #2 개선: 더 큰 number input 레이블 */
+    /* #2 개선: 더 큰 number input 레이블 - 더 구체적인 선택자 */
+    div[data-testid="stNumberInput"] > label,
     .stNumberInput > label {
         font-family: 'Lato', sans-serif !important;
         font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
@@ -117,6 +140,16 @@ st.markdown("""
         line-height: 1.5 !important;
         font-style: normal !important;
         margin-bottom: 0.8rem !important;
+        display: block !important;
+    }
+    
+    /* Number input 내부 p 태그 스타일 오버라이드 */
+    div[data-testid="stNumberInput"] > label > div > p,
+    .stNumberInput > label > div > p {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
+        margin: 0 !important;
     }
     
     .stNumberInput > div > div > input {
@@ -236,6 +269,35 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 500;
         font-family: 'Lato', sans-serif;
+    }
+    
+    
+    /* 모든 위젯의 폰트 크기를 강제로 크게 만들기 */
+    .stApp [data-testid="stWidgetLabel"] {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
+    }
+    
+    /* Streamlit 위젯 라벨 내부의 모든 텍스트 */
+    .stApp [data-testid="stWidgetLabel"] p,
+    .stApp [data-testid="stWidgetLabel"] span {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
+    }
+    
+    /* 라디오 버튼 옵션 텍스트 크기 */
+    .stApp [data-baseweb="radio"] > label {
+        font-size: 1.8rem !important;
+        font-weight: 800 !important;
+        padding: 1.2rem 2.5rem !important;
+    }
+    
+    /* 모든 입력 필드 텍스트 크기 */
+    .stApp input[type="number"],
+    .stApp input[type="text"] {
+        font-size: 1.4rem !important;
     }
     
     /* Hide Streamlit elements */
