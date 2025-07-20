@@ -68,19 +68,18 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
     }
     
-    /* Section headers with modern styling */
+    /* Section headers with elegant italic style (restored) */
     .section-header {
-        font-family: 'Inter', sans-serif;
-        font-size: 2rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 2.2rem;
         font-weight: 700;
-        color: var(--dark-blue);
-        letter-spacing: -0.01em;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 3px solid var(--primary-blue);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        color: #2c5282;
+        font-style: italic;
+        text-transform: capitalize;
+        letter-spacing: 0.3px;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid #3B82F6;
     }
     
     /* #1 Fix: Force larger Yes/No button text with multiple approaches */
@@ -106,10 +105,10 @@ st.markdown("""
         position: relative !important;
     }
     
-    /* Force text size for radio options */
+    /* Force text size for radio options - same size as labels */
     div[data-testid="stRadio"] > div[role="radiogroup"] > label span,
     div[data-testid="stRadio"] > div[role="radiogroup"] > label p {
-        font-size: 1.75rem !important;
+        font-size: 1.5rem !important;  /* Same as label size */
         font-weight: 700 !important;
         color: var(--text-primary) !important;
         text-transform: uppercase !important;
@@ -227,15 +226,16 @@ st.markdown("""
     }
     
     .results-title {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.75rem;
+        font-family: 'Crimson Text', serif;
+        font-size: 2.2rem;
         font-weight: 700;
-        margin-bottom: 1.5rem;
-        letter-spacing: -0.01em;
+        margin-bottom: 2rem;
+        font-style: italic;
     }
     
     .results-content {
-        font-size: 1.25rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.5rem;
         line-height: 1.6;
     }
     
@@ -323,6 +323,17 @@ st.markdown("""
     .stDeployButton {display:none;}
     header {visibility: hidden;}
     
+    /* Hide help tooltips to remove white spaces */
+    [data-testid="stTooltipIcon"] {
+        display: none !important;
+    }
+    
+    /* Remove extra spacing from streamlit containers */
+    .element-container:has(> [data-testid="stTooltipIcon"]) {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .main-title { font-size: 2.5rem; }
@@ -340,7 +351,7 @@ st.markdown("""
         // Force radio button text to be larger
         const radioLabels = document.querySelectorAll('div[role="radiogroup"] label span');
         radioLabels.forEach(label => {
-            label.style.fontSize = '1.75rem';
+            label.style.fontSize = '1.5rem';
             label.style.fontWeight = '700';
         });
         
@@ -412,164 +423,150 @@ def main():
         
         # Part A: Healthcare Exposure
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">📋 Part A: Healthcare Exposure & Admission History</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part A: Healthcare Exposure & Admission History</div>', unsafe_allow_html=True)
         
         col_a1, col_a2 = st.columns(2, gap="medium")
         with col_a1:
             patient_data['Hospital days before ICU admission'] = st.number_input(
-                "Hospital days before ICU admission", 
+                "Hospital days before ICU admission : Count days from current admission to ICU transfer", 
                 min_value=0, 
                 max_value=365, 
-                value=0,
-                help="Count days from current hospital admission to ICU transfer"
+                value=0
             )
             
         with col_a2:
             patient_data['Admission to long-term care facility'] = st.radio(
-                "Admission from long-term care facility",
+                "Admission from long-term care facility : Nursing home, Long-Term Acute Care, or rehabilitation facility",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ltc",
-                help="Includes nursing home, LTAC, or rehabilitation facility"
+                key="ltc"
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part B: Medical Conditions
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">🏥 Part B: Medical Conditions & Interventions</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part B: Medical Conditions & Interventions</div>', unsafe_allow_html=True)
         
         col_b1, col_b2 = st.columns(2, gap="medium")
         with col_b1:
             patient_data['ESRD on renal replacement therapy'] = st.radio(
-                "ESRD on renal replacement therapy",
+                "ESRD on renal replacement therapy : Dialysis or CRRT required",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="esrd",
-                help="Dialysis or CRRT required"
+                key="esrd"
             )
             
             patient_data['VRE'] = st.radio(
-                "VRE colonization history",
+                "VRE colonization : Previous VRE colonization (any time)",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="vre",
-                help="Previous VRE colonization at any time"
+                key="vre"
             )
             
         with col_b2:
             patient_data['Steroid use'] = st.radio(
-                "Recent steroid use",
+                "Steroid use : Systemic corticosteroids within 3 months",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="steroid",
-                help="Systemic corticosteroids within 3 months"
+                key="steroid"
             )
             
             patient_data['Endoscopy'] = st.radio(
-                "Recent endoscopy",
+                "Recent endoscopy : Any endoscopic procedure within 30 days",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="endoscopy",
-                help="Any endoscopic procedure within 30 days"
+                key="endoscopy"
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part C: Invasive Devices
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">🔧 Part C: Invasive Devices (within 48h of ICU admission)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part C: Invasive Devices (within 48 hours of ICU admission)</div>', unsafe_allow_html=True)
         
         col_c1, col_c2, col_c3 = st.columns(3, gap="medium")
         with col_c1:
             patient_data['Central venous catheter'] = st.radio(
-                "Central venous catheter",
+                "Central venous catheter : Subclavian, jugular, femoral line",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="cvc",
-                help="Any central line access"
+                key="cvc"
             )
             
         with col_c2:
             patient_data['Nasogastric tube'] = st.radio(
-                "Nasogastric tube",
+                "Nasogastric tube : NG tube or OG tube placement",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ngt",
-                help="NG or OG tube"
+                key="ngt"
             )
             
         with col_c3:
             patient_data['Biliary drain'] = st.radio(
-                "Biliary drain",
+                "Biliary drain : PTBD, ERCP stent, drainage procedures",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="biliary",
-                help="PTBD, ERCP stent, etc."
+                key="biliary"
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part D: Antibiotic Exposure
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">💊 Part D: Antibiotic Exposure (within 3 months)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Part D: Antibiotic Exposure (within 3 months before ICU admission)</div>', unsafe_allow_html=True)
         
         col_d1, col_d2 = st.columns(2, gap="medium")
         with col_d1:
             antibiotic_data['Fluoroquinolone'] = st.radio(
-                "Fluoroquinolone",
+                "Fluoroquinolone : Ciprofloxacin, Levofloxacin, Moxifloxacin",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="fluoro",
-                help="Ciprofloxacin, Levofloxacin, Moxifloxacin"
+                key="fluoro"
             )
             
             antibiotic_data['Cephalosporin'] = st.radio(
-                "Cephalosporin",
+                "Cephalosporin : Ceftriaxone, Cefazolin, Ceftazidime, Cefepime",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ceph",
-                help="Any generation cephalosporin"
+                key="ceph"
             )
             
             antibiotic_data['Carbapenem'] = st.radio(
-                "Carbapenem",
+                "Carbapenem : Meropenem, Imipenem, Ertapenem, Doripenem",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="carbap",
-                help="Meropenem, Imipenem, Ertapenem"
+                key="carbap"
             )
             
         with col_d2:
             antibiotic_data['β-lactam/β-lactamase inhibitor'] = st.radio(
-                "β-lactam/β-lactamase inhibitor",
+                "β-lactam/β-lactamase inhibitor : Piperacillin/Tazobactam, Ampicillin/Sulbactam",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="beta_lactam",
-                help="Piperacillin/Tazobactam, Ampicillin/Sulbactam"
+                key="beta_lactam"
             )
             
             antibiotic_data['Aminoglycoside'] = st.radio(
-                "Aminoglycoside",
+                "Aminoglycoside : Gentamicin, Amikacin, Tobramycin",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="amino",
-                help="Gentamicin, Amikacin, Tobramycin"
+                key="amino"
             )
         
         # Auto-calculated score
         antibiotic_risk_score = sum(antibiotic_data.values())
-        st.markdown(f'<div class="auto-calc">💊 Antibiotic Risk Score: <strong>{antibiotic_risk_score}/5</strong> classes exposed</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="auto-calc">📊 Antibiotic Risk Score: <strong>{antibiotic_risk_score}</strong> (auto-calculated)</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
         
@@ -579,7 +576,6 @@ def main():
             st.markdown(f'<div class="validation-warning">{warning}</div>', unsafe_allow_html=True)
         
         # Calculate button
-        st.markdown("<br>", unsafe_allow_html=True)
         if st.button("🔬 CALCULATE CPE RISK", key="calc_btn", use_container_width=True):
             # Prepare model input
             model_input = {
@@ -636,12 +632,11 @@ def main():
             st.markdown(f'''
             <div class="{risk_class}">
                 <div class="results-box">
-                    <div class="results-title">{risk_emoji} CPE Risk Assessment Result</div>
+                    <div class="results-title">🎯 CPE Risk Assessment</div>
                     <div class="results-content">
-                        <div style="font-size: 2rem; font-weight: 800; margin: 1rem 0;">{risk_text}</div>
-                        <div style="font-size: 1.5rem; margin: 0.5rem 0;">Risk Score: <strong>{probability*100:.1f}%</strong></div>
-                        <hr style="margin: 1.5rem 0; opacity: 0.3;">
-                        <div style="font-size: 1.1rem;">{recommendation}</div>
+                        <strong>{risk_text}</strong><br>
+                        Risk Probability: <strong>{probability*100:.1f}%</strong><br><br>
+                        {recommendation}
                     </div>
                 </div>
             </div>
@@ -668,14 +663,21 @@ def main():
             st.markdown('<div class="info-title">🏥 About This Calculator</div>', unsafe_allow_html=True)
             st.markdown('''
             <div class="info-content">
-                This tool predicts CPE colonization risk for ICU patients using a validated machine learning model.<br><br>
+                <strong>Purpose:</strong> Predicts CPE colonization risk within 48 hours of ICU admission<br><br>
                 
                 <strong>Algorithm:</strong> Logistic Regression with SMOTE<br>
-                <strong>Training:</strong> 1,992 ICU admissions (2022)<br>
-                <strong>Validation:</strong> 2,923 ICU admissions (2023)<br>
-                <strong>CPE Prevalence:</strong> 8-11% in ICU setting<br><br>
+                <strong>Training Data:</strong> 1,992 ICU admissions (2022)<br>
+                <strong>Validation Data:</strong> 2,923 ICU admissions (2023)<br>
+                <strong>Institution:</strong> Hallym University Sacred Heart Hospital<br><br>
                 
-                <em>For clinical decision support only.</em>
+                <strong>Key Predictors:</strong><br>
+                • Central venous catheter use<br>
+                • Nasogastric tube placement<br>
+                • Prior antibiotic exposure<br>
+                • Long-term care facility admission<br>
+                • Hospital days before ICU<br><br>
+                
+                <em>This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.</em>
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
