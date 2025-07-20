@@ -343,6 +343,15 @@ st.markdown("""
             gap: 1rem !important;
         }
     }
+    /* Remove white box */
+    .info-box:empty {
+        display: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
 </style>
 
 <script>
