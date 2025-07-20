@@ -500,7 +500,7 @@ def main():
             
         with col_c2:
             patient_data['Nasogastric tube'] = st.radio(
-                "Nasogastric tube : NG tube or OG tube placement",
+                "Nasogastric tube or Orogastric tube placement",
                 [0, 1],
                 format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
