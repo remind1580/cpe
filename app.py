@@ -61,13 +61,13 @@ st.markdown("""
         border-bottom: 3px solid #3B82F6;
     }
     
-    /* Large radio button labels - combined with description */
+    /* #2 개선: 더 큰 라디오 버튼 레이블 (질문 텍스트) */
     .stRadio > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.4rem !important;
-        font-weight: 600 !important;
+        font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
+        font-weight: 700 !important;    /* 600 → 700 */
         color: #000000 !important;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.8rem !important;
         line-height: 1.5 !important;
         font-style: normal !important;
     }
@@ -75,29 +75,30 @@ st.markdown("""
     /* Enhanced radio buttons with larger text */
     .stRadio > div {
         flex-direction: row !important;
-        gap: 2rem !important;
+        gap: 2.5rem !important;  /* 2rem → 2.5rem */
         margin-top: 0.5rem !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 1.5rem !important;  /* 1rem → 1.5rem */
     }
     
+    /* #1 개선: Yes/No 버튼 크기 증가 */
     .stRadio > div > label {
         background-color: #F9FAFB !important;
         border: 3px solid #D1D5DB !important;
         border-radius: 10px !important;
-        padding: 1rem 2rem !important;
+        padding: 1.2rem 2.5rem !important;  /* 1rem 2rem → 1.2rem 2.5rem */
         margin: 0 !important;
         cursor: pointer !important;
         transition: all 0.2s !important;
-        font-size: 1.3rem !important;
-        font-weight: 700 !important;
-        min-width: 80px !important;
+        font-size: 1.8rem !important;  /* 1.3rem → 1.8rem */
+        font-weight: 800 !important;   /* 700 → 800 */
+        min-width: 120px !important;   /* 80px → 120px */
         text-align: center !important;
     }
     
     .stRadio > div > label:hover {
         background-color: #EBF4FF !important;
         border-color: #3B82F6 !important;
-        transform: translateY(-1px) !important;
+        transform: translateY(-2px) !important;  /* -1px → -2px */
     }
     
     .stRadio > div > label[data-checked="true"] {
@@ -107,22 +108,22 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
     }
     
-    /* Large number input labels */
+    /* #2 개선: 더 큰 number input 레이블 */
     .stNumberInput > label {
         font-family: 'Lato', sans-serif !important;
-        font-size: 1.4rem !important;
-        font-weight: 600 !important;
+        font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
+        font-weight: 700 !important;   /* 600 → 700 */
         color: #000000 !important;
         line-height: 1.5 !important;
         font-style: normal !important;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.8rem !important;
     }
     
     .stNumberInput > div > div > input {
         border: 2px solid #D1D5DB !important;
         border-radius: 8px !important;
         padding: 1rem !important;
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;  /* 1.2rem → 1.4rem */
         background-color: #F9FAFB !important;
         font-family: 'Lato', sans-serif !important;
     }
