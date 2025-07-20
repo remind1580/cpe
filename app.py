@@ -12,486 +12,564 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Professional medical UI with elegant fonts
+# Enhanced CSS with better styling
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap');
     
-    /* Clean medical background */
-    .stApp {
-        background-color: #F8F9FA;
-        font-family: 'Lato', sans-serif;
-        color: #1F2937;
+    /* Root variables for consistent design */
+    :root {
+        --primary-blue: #2563EB;
+        --dark-blue: #1E40AF;
+        --light-blue: #DBEAFE;
+        --success-green: #10B981;
+        --warning-orange: #F59E0B;
+        --danger-red: #DC2626;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --bg-primary: #F9FAFB;
+        --bg-white: #FFFFFF;
+        --border-color: #E5E7EB;
     }
     
-    /* Elegant main title with italic serif */
+    /* Global styles */
+    .stApp {
+        background-color: var(--bg-primary);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-primary);
+    }
+    
+    /* Main title with elegant serif font */
     .main-title {
         font-family: 'Crimson Text', serif;
-        font-size: 4rem;
+        font-size: 3.5rem;
         font-weight: 600;
-        color: #1a365d;
+        color: var(--dark-blue);
         text-align: center;
         margin-bottom: 3rem;
         font-style: italic;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
         line-height: 1.2;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     
-    /* Section boxes with reduced spacing */
+    /* Section boxes with subtle shadows */
     .section-box {
-        background: #FFFFFF;
-        border: 2px solid #E5E7EB;
-        border-radius: 12px;
-        padding: 2rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        background: var(--bg-white);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 2.5rem;
+        margin: 1.5rem 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
+        transition: all 0.2s ease;
     }
     
-    /* Elegant section headers */
+    .section-box:hover {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    }
+    
+    /* Section headers with modern styling */
     .section-header {
-        font-family: 'Lato', sans-serif;
-        font-size: 2.2rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 2rem;
         font-weight: 700;
-        color: #2c5282;
-        font-style: italic;
-        text-transform: capitalize;
-        letter-spacing: 0.3px;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 3px solid #3B82F6;
+        color: var(--dark-blue);
+        letter-spacing: -0.01em;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid var(--primary-blue);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
-    /* #2 개선: 더 큰 라디오 버튼 레이블 (질문 텍스트) - 더 구체적인 선택자 */
+    /* #1 Fix: Force larger Yes/No button text with multiple approaches */
+    /* Remove default Streamlit radio styling */
+    div[data-testid="stRadio"] > div[role="radiogroup"] {
+        gap: 1.5rem !important;
+        display: flex !important;
+        flex-direction: row !important;
+        margin: 1rem 0 2rem 0 !important;
+    }
+    
+    /* Style radio button containers */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label {
+        background-color: var(--bg-primary) !important;
+        border: 3px solid var(--border-color) !important;
+        border-radius: 12px !important;
+        padding: 1.5rem 3rem !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        flex: 0 0 auto !important;
+        min-width: 140px !important;
+        text-align: center !important;
+        position: relative !important;
+    }
+    
+    /* Force text size for radio options */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label span,
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label p {
+        font-size: 1.75rem !important;
+        font-weight: 700 !important;
+        color: var(--text-primary) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+    
+    /* Selected state */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
+        background-color: var(--primary-blue) !important;
+        border-color: var(--primary-blue) !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+    }
+    
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) span,
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) p {
+        color: white !important;
+    }
+    
+    /* Hover state */
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:hover {
+        border-color: var(--primary-blue) !important;
+        background-color: var(--light-blue) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Hide radio input circles */
+    div[data-testid="stRadio"] input[type="radio"] {
+        display: none !important;
+    }
+    
+    /* #2 Fix: Larger question labels */
     div[data-testid="stRadio"] > label,
-    .stRadio > label {
-        font-family: 'Lato', sans-serif !important;
-        font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
-        font-weight: 700 !important;    /* 600 → 700 */
-        color: #000000 !important;
-        margin-bottom: 0.8rem !important;
-        line-height: 1.5 !important;
-        font-style: normal !important;
+    div[data-testid="stNumberInput"] > label {
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.4 !important;
         display: block !important;
     }
     
-    /* Streamlit 내부 p 태그 스타일 오버라이드 */
-    div[data-testid="stRadio"] > label > div > p,
-    .stRadio > label > div > p {
-        font-size: 1.8rem !important;
-        font-weight: 700 !important;
-        color: #000000 !important;
+    div[data-testid="stRadio"] > label p,
+    div[data-testid="stNumberInput"] > label p {
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
         margin: 0 !important;
     }
     
-    /* Enhanced radio buttons with larger text */
-    div[data-testid="stRadio"] > div[role="radiogroup"],
-    .stRadio > div {
-        flex-direction: row !important;
-        gap: 2.5rem !important;  /* 2rem → 2.5rem */
-        margin-top: 0.5rem !important;
-        margin-bottom: 1.5rem !important;  /* 1rem → 1.5rem */
+    /* #3 Fix: Remove number input spinner buttons and style */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0 !important;
+        display: none !important;
     }
     
-    /* #1 개선: Yes/No 버튼 크기 증가 - 더 구체적인 선택자 */
-    div[data-testid="stRadio"] > div[role="radiogroup"] > label,
-    .stRadio > div > label {
-        background-color: #F9FAFB !important;
-        border: 3px solid #D1D5DB !important;
+    input[type="number"] {
+        -moz-appearance: textfield !important;
+        appearance: textfield !important;
+    }
+    
+    div[data-testid="stNumberInput"] > div > div > input {
+        border: 2px solid var(--border-color) !important;
         border-radius: 10px !important;
-        padding: 1.2rem 2.5rem !important;  /* 1rem 2rem → 1.2rem 2.5rem */
-        margin: 0 !important;
-        cursor: pointer !important;
-        transition: all 0.2s !important;
-        font-size: 1.8rem !important;  /* 1.3rem → 1.8rem */
-        font-weight: 800 !important;   /* 700 → 800 */
-        min-width: 120px !important;   /* 80px → 120px */
+        padding: 1rem 1.5rem !important;
+        font-size: 1.4rem !important;
+        background-color: var(--bg-primary) !important;
+        font-weight: 500 !important;
+        width: 100% !important;
         text-align: center !important;
     }
     
-    /* Yes/No 텍스트를 더 크게 - span 태그 직접 타겟팅 */
-    div[data-testid="stRadio"] > div[role="radiogroup"] > label > div > p,
-    .stRadio > div > label span {
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
+    div[data-testid="stNumberInput"] > div > div > input:focus {
+        border-color: var(--primary-blue) !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+        outline: none !important;
     }
     
-    div[data-testid="stRadio"] > div[role="radiogroup"] > label:hover,
-    .stRadio > div > label:hover {
-        background-color: #EBF4FF !important;
-        border-color: #3B82F6 !important;
-        transform: translateY(-2px) !important;  /* -1px → -2px */
+    /* Hide increment/decrement buttons completely */
+    div[data-testid="stNumberInput"] > div > div > button {
+        display: none !important;
     }
     
-    div[data-testid="stRadio"] > div[role="radiogroup"] > label[data-checked="true"],
-    .stRadio > div > label[data-checked="true"] {
-        background-color: #3B82F6 !important;
-        border-color: #3B82F6 !important;
-        color: white !important;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
-    }
-    
-    /* #2 개선: 더 큰 number input 레이블 - 더 구체적인 선택자 */
-    div[data-testid="stNumberInput"] > label,
-    .stNumberInput > label {
-        font-family: 'Lato', sans-serif !important;
-        font-size: 1.8rem !important;  /* 1.4rem → 1.8rem */
-        font-weight: 700 !important;   /* 600 → 700 */
-        color: #000000 !important;
-        line-height: 1.5 !important;
-        font-style: normal !important;
-        margin-bottom: 0.8rem !important;
-        display: block !important;
-    }
-    
-    /* Number input 내부 p 태그 스타일 오버라이드 */
-    div[data-testid="stNumberInput"] > label > div > p,
-    .stNumberInput > label > div > p {
-        font-size: 1.8rem !important;
-        font-weight: 700 !important;
-        color: #000000 !important;
-        margin: 0 !important;
-    }
-    
-    .stNumberInput > div > div > input {
-        border: 2px solid #D1D5DB !important;
-        border-radius: 8px !important;
-        padding: 1rem !important;
-        font-size: 1.4rem !important;  /* 1.2rem → 1.4rem */
-        background-color: #F9FAFB !important;
-        font-family: 'Lato', sans-serif !important;
-    }
-    
-    .stNumberInput > div > div > input:focus {
-        border-color: #3B82F6 !important;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-    }
-    
-    /* Calculate button */
+    /* Calculate button with modern gradient */
     .stButton > button {
-        background: linear-gradient(135deg, #10B981, #059669) !important;
+        background: linear-gradient(135deg, var(--success-green), #059669) !important;
         color: white !important;
         border: none !important;
         border-radius: 12px !important;
-        padding: 1.5rem 4rem !important;
-        font-size: 1.6rem !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.5px !important;
-        transition: all 0.3s !important;
-        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3) !important;
-        text-transform: uppercase !important;
+        padding: 1.25rem 3rem !important;
+        font-size: 1.25rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.025em !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25) !important;
         width: 100% !important;
-        font-family: 'Lato', sans-serif !important;
-        margin-top: 2rem !important;
+        font-family: 'Inter', sans-serif !important;
+        text-transform: uppercase !important;
     }
     
     .stButton > button:hover {
-        background: linear-gradient(135deg, #059669, #047857) !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4) !important;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
     }
     
-    /* Results boxes */
+    /* Results section styling */
     .results-box {
-        background: #10B981;
+        background: linear-gradient(135deg, var(--success-green), #059669);
         color: white;
-        border-radius: 12px;
-        padding: 3rem;
-        margin: 2rem 0;
+        border-radius: 16px;
+        padding: 2.5rem;
+        margin: 1.5rem 0;
         text-align: center;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     }
     
     .results-title {
-        font-family: 'Crimson Text', serif;
-        font-size: 2.2rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.75rem;
         font-weight: 700;
-        margin-bottom: 2rem;
-        font-style: italic;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.01em;
     }
     
     .results-content {
-        font-family: 'Lato', sans-serif;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         line-height: 1.6;
     }
     
-    .risk-high .results-box { background: linear-gradient(135deg, #DC2626, #B91C1C); }
-    .risk-medium .results-box { background: linear-gradient(135deg, #D97706, #B45309); }
-    .risk-low .results-box { background: linear-gradient(135deg, #10B981, #059669); }
+    .risk-high .results-box { 
+        background: linear-gradient(135deg, var(--danger-red), #B91C1C); 
+    }
+    .risk-medium .results-box { 
+        background: linear-gradient(135deg, var(--warning-orange), #D97706); 
+    }
     
-    /* Info boxes */
+    /* Info box styling */
     .info-box {
-        background: #F8FAFC;
-        border: 2px solid #E2E8F0;
+        background: var(--bg-white);
+        border: 1px solid var(--border-color);
         border-radius: 12px;
-        padding: 2rem;
+        padding: 1.75rem;
         margin: 1.5rem 0;
+        transition: all 0.2s ease;
+    }
+    
+    .info-box:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     
     .info-title {
-        font-family: 'Crimson Text', serif;
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #1F2937;
-        margin-bottom: 1.5rem;
-        font-style: italic;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .info-content {
-        font-family: 'Lato', sans-serif;
-        font-size: 1.2rem;
-        color: #4B5563;
+        font-size: 1.05rem;
+        color: var(--text-secondary);
         line-height: 1.7;
     }
     
-    /* Auto-calculated score */
+    .info-content strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+    
+    /* Auto-calculated score with modern design */
     .auto-calc {
         background: linear-gradient(135deg, #EBF8FF, #DBEAFE);
-        border: 2px solid #3B82F6;
-        border-radius: 10px;
-        padding: 1.5rem;
-        font-size: 1.4rem;
-        color: #1E40AF;
+        border: 2px solid var(--primary-blue);
+        border-radius: 12px;
+        padding: 1.25rem;
+        font-size: 1.25rem;
+        color: var(--dark-blue);
         text-align: center;
         margin-top: 1.5rem;
         font-weight: 600;
-        font-family: 'Lato', sans-serif;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
     }
     
     /* Validation warnings */
     .validation-warning {
         background: #FEF2F2;
-        border: 2px solid #F87171;
+        border-left: 4px solid var(--danger-red);
         border-radius: 8px;
-        padding: 1rem;
+        padding: 1rem 1.25rem;
         margin: 1rem 0;
-        color: #B91C1C;
-        font-size: 1.1rem;
+        color: #991B1B;
+        font-size: 1rem;
         font-weight: 500;
-        font-family: 'Lato', sans-serif;
     }
     
-    
-    /* 모든 위젯의 폰트 크기를 강제로 크게 만들기 */
-    .stApp [data-testid="stWidgetLabel"] {
-        font-size: 1.8rem !important;
-        font-weight: 700 !important;
-        color: #000000 !important;
-    }
-    
-    /* Streamlit 위젯 라벨 내부의 모든 텍스트 */
-    .stApp [data-testid="stWidgetLabel"] p,
-    .stApp [data-testid="stWidgetLabel"] span {
-        font-size: 1.8rem !important;
-        font-weight: 700 !important;
-        color: #000000 !important;
-    }
-    
-    /* 라디오 버튼 옵션 텍스트 크기 */
-    .stApp [data-baseweb="radio"] > label {
-        font-size: 1.8rem !important;
-        font-weight: 800 !important;
-        padding: 1.2rem 2.5rem !important;
-    }
-    
-    /* 모든 입력 필드 텍스트 크기 */
-    .stApp input[type="number"],
-    .stApp input[type="text"] {
-        font-size: 1.4rem !important;
+    /* Success message */
+    .stSuccess {
+        background-color: #D1FAE5 !important;
+        color: #065F46 !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+        border-left: 4px solid var(--success-green) !important;
     }
     
     /* Hide Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
+    header {visibility: hidden;}
     
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .main-title { font-size: 2.5rem; }
+        .section-header { font-size: 1.5rem; }
+        div[data-testid="stRadio"] > div[role="radiogroup"] {
+            flex-direction: column !important;
+            gap: 1rem !important;
+        }
+    }
 </style>
+
+<script>
+    // Force style application for Streamlit components
+    function applyCustomStyles() {
+        // Force radio button text to be larger
+        const radioLabels = document.querySelectorAll('div[role="radiogroup"] label span');
+        radioLabels.forEach(label => {
+            label.style.fontSize = '1.75rem';
+            label.style.fontWeight = '700';
+        });
+        
+        // Force widget labels to be larger
+        const widgetLabels = document.querySelectorAll('[data-testid="stWidgetLabel"] p');
+        widgetLabels.forEach(label => {
+            label.style.fontSize = '1.5rem';
+            label.style.fontWeight = '600';
+        });
+    }
+    
+    // Apply styles on load and mutations
+    const observer = new MutationObserver(applyCustomStyles);
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Initial application
+    setTimeout(applyCustomStyles, 100);
+    setTimeout(applyCustomStyles, 500);
+    setTimeout(applyCustomStyles, 1000);
+</script>
 """, unsafe_allow_html=True)
 
-# Elegant title
+# Main title
 st.markdown('<h1 class="main-title">CPE (Carbapenemase-producing Enterobacterales) Risk Predictor</h1>', unsafe_allow_html=True)
 
+# Load model function
 @st.cache_resource
 def load_model():
     try:
         with open('cpe_model.pkl', 'rb') as f:
             return pickle.load(f)
     except Exception as e:
-        st.error(f"Error loading model: {str(e)}")
+        st.error(f"⚠️ Error loading model: {str(e)}")
         return None
 
+# Validation function
 def validate_inputs(patient_data, antibiotic_data):
     warnings = []
     
-    if patient_data.get('ESRD on renal replacement therapy') == 0:
-        warnings.append("⚠️ Consider if patient truly has no renal replacement therapy")
+    if patient_data.get('ESRD on renal replacement therapy') == 1 and patient_data.get('Hospital days before ICU admission') == 0:
+        warnings.append("⚠️ Patient on RRT with 0 hospital days - please verify")
     
     antibiotic_count = sum(antibiotic_data.values())
     if antibiotic_count >= 4:
-        warnings.append("⚠️ High antibiotic exposure detected - please verify")
+        warnings.append("⚠️ High antibiotic exposure (4+ classes) - increased CPE risk")
+    
+    if patient_data.get('Central venous catheter') == 1 and patient_data.get('Nasogastric tube') == 1 and patient_data.get('Biliary drain') == 1:
+        warnings.append("⚠️ Multiple invasive devices present - consider enhanced monitoring")
     
     return warnings
 
 def main():
+    # Load model
     model_data = load_model()
     
     if model_data is None:
-        st.error("Failed to load model")
+        st.error("❌ Failed to load prediction model. Please check model file.")
         return
         
     model = model_data['model']
     features = model_data['features']
     
-    # Main layout
-    col1, col2 = st.columns([2, 1], gap="large")
+    # Main layout - adjusted column ratio for better space utilization
+    col1, col2 = st.columns([2.5, 1], gap="large")
     
     with col1:
         patient_data = {}
         antibiotic_data = {}
         
-        # Part A: Healthcare Exposure & Admission History
+        # Part A: Healthcare Exposure
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part A: Healthcare Exposure & Admission History</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">📋 Part A: Healthcare Exposure & Admission History</div>', unsafe_allow_html=True)
         
-        col_a, col_b = st.columns(2)
-        with col_a:
+        col_a1, col_a2 = st.columns(2, gap="medium")
+        with col_a1:
             patient_data['Hospital days before ICU admission'] = st.number_input(
-                "Hospital days before ICU admission : Count days from current admission to ICU transfer", 
-                min_value=0, max_value=100, value=0
+                "Hospital days before ICU admission", 
+                min_value=0, 
+                max_value=365, 
+                value=0,
+                help="Count days from current hospital admission to ICU transfer"
             )
             
-        with col_b:
+        with col_a2:
             patient_data['Admission to long-term care facility'] = st.radio(
-                "Admission from long-term care facility : Nursing home, Long-Term Acute Care, or rehabilitation facility",
+                "Admission from long-term care facility",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ltc"
+                key="ltc",
+                help="Includes nursing home, LTAC, or rehabilitation facility"
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Part B: Medical Conditions & Interventions
+        # Part B: Medical Conditions
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part B: Medical Conditions & Interventions</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">🏥 Part B: Medical Conditions & Interventions</div>', unsafe_allow_html=True)
         
-        col_c, col_d = st.columns(2)
-        with col_c:
+        col_b1, col_b2 = st.columns(2, gap="medium")
+        with col_b1:
             patient_data['ESRD on renal replacement therapy'] = st.radio(
-                "ESRD on renal replacement therapy : Dialysis or CRRT required",
+                "ESRD on renal replacement therapy",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="esrd"
+                key="esrd",
+                help="Dialysis or CRRT required"
             )
             
             patient_data['VRE'] = st.radio(
-                "VRE colonization : Previous VRE colonization (any time)",
+                "VRE colonization history",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="vre"
+                key="vre",
+                help="Previous VRE colonization at any time"
             )
             
-        with col_d:
+        with col_b2:
             patient_data['Steroid use'] = st.radio(
-                "Steroid use : Systemic corticosteroids within 3 months",
+                "Recent steroid use",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="steroid"
+                key="steroid",
+                help="Systemic corticosteroids within 3 months"
             )
             
             patient_data['Endoscopy'] = st.radio(
-                "Recent endoscopy : Any endoscopic procedure within 30 days",
+                "Recent endoscopy",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="endoscopy"
+                key="endoscopy",
+                help="Any endoscopic procedure within 30 days"
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part C: Invasive Devices
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part C: Invasive Devices (within 48 hours of ICU admission)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">🔧 Part C: Invasive Devices (within 48h of ICU admission)</div>', unsafe_allow_html=True)
         
-        col_e, col_f = st.columns(2)
-        with col_e:
+        col_c1, col_c2, col_c3 = st.columns(3, gap="medium")
+        with col_c1:
             patient_data['Central venous catheter'] = st.radio(
-                "Central venous catheter : Subclavian, jugular, femoral line",
+                "Central venous catheter",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="cvc"
+                key="cvc",
+                help="Any central line access"
             )
             
+        with col_c2:
             patient_data['Nasogastric tube'] = st.radio(
-                "Nasogastric tube : NG tube or OG tube placement",
+                "Nasogastric tube",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ngt"
+                key="ngt",
+                help="NG or OG tube"
             )
             
-        with col_f:
+        with col_c3:
             patient_data['Biliary drain'] = st.radio(
-                "Biliary drain : PTBD, ERCP stent, drainage procedures",
+                "Biliary drain",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="biliary"
+                key="biliary",
+                help="PTBD, ERCP stent, etc."
             )
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Part D: Antibiotic Exposure
         st.markdown('<div class="section-box">', unsafe_allow_html=True)
-        st.markdown('<div class="section-header">Part D: Antibiotic Exposure (within 3 months before ICU admission)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">💊 Part D: Antibiotic Exposure (within 3 months)</div>', unsafe_allow_html=True)
         
-        col_g, col_h = st.columns(2)
-        with col_g:
+        col_d1, col_d2 = st.columns(2, gap="medium")
+        with col_d1:
             antibiotic_data['Fluoroquinolone'] = st.radio(
-                "Fluoroquinolone : Ciprofloxacin, Levofloxacin, Moxifloxacin",
+                "Fluoroquinolone",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="fluoro"
+                key="fluoro",
+                help="Ciprofloxacin, Levofloxacin, Moxifloxacin"
             )
             
             antibiotic_data['Cephalosporin'] = st.radio(
-                "Cephalosporin : Ceftriaxone, Cefazolin, Ceftazidime, Cefepime",
+                "Cephalosporin",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="ceph"
+                key="ceph",
+                help="Any generation cephalosporin"
             )
             
             antibiotic_data['Carbapenem'] = st.radio(
-                "Carbapenem : Meropenem, Imipenem, Ertapenem, Doripenem",
+                "Carbapenem",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="carbap"
+                key="carbap",
+                help="Meropenem, Imipenem, Ertapenem"
             )
             
-        with col_h:
+        with col_d2:
             antibiotic_data['β-lactam/β-lactamase inhibitor'] = st.radio(
-                "β-lactam/β-lactamase inhibitor : Piperacillin/Tazobactam, Ampicillin/Sulbactam",
+                "β-lactam/β-lactamase inhibitor",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="beta_lactam"
+                key="beta_lactam",
+                help="Piperacillin/Tazobactam, Ampicillin/Sulbactam"
             )
             
             antibiotic_data['Aminoglycoside'] = st.radio(
-                "Aminoglycoside : Gentamicin, Amikacin, Tobramycin",
+                "Aminoglycoside",
                 [0, 1],
-                format_func=lambda x: "Yes" if x else "No",
+                format_func=lambda x: "YES" if x else "NO",
                 horizontal=True,
-                key="amino"
+                key="amino",
+                help="Gentamicin, Amikacin, Tobramycin"
             )
         
-        # Auto-calculated Antibiotic Risk Score
+        # Auto-calculated score
         antibiotic_risk_score = sum(antibiotic_data.values())
-        st.markdown(f'<div class="auto-calc">📊 Antibiotic Risk Score: <strong>{antibiotic_risk_score}</strong> (auto-calculated)</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="auto-calc">💊 Antibiotic Risk Score: <strong>{antibiotic_risk_score}/5</strong> classes exposed</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
         
@@ -501,8 +579,9 @@ def main():
             st.markdown(f'<div class="validation-warning">{warning}</div>', unsafe_allow_html=True)
         
         # Calculate button
-        if st.button("🔬 Calculate CPE Risk", key="calc_btn"):
-            # Prepare data for model
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("🔬 CALCULATE CPE RISK", key="calc_btn", use_container_width=True):
+            # Prepare model input
             model_input = {
                 'Hospital days before ICU admission': patient_data['Hospital days before ICU admission'],
                 'ESRD on renal replacement therapy': patient_data['ESRD on renal replacement therapy'],
@@ -527,78 +606,113 @@ def main():
                 st.session_state.show_result = True
                 st.session_state.antibiotic_breakdown = antibiotic_data
                 st.session_state.antibiotic_total = antibiotic_risk_score
-                st.success("✅ Risk assessment completed!")
+                st.success("✅ Risk assessment completed successfully!")
             except Exception as e:
-                st.error(f"Prediction error: {str(e)}")
+                st.error(f"❌ Prediction error: {str(e)}")
     
     with col2:
         # Results section
         if hasattr(st.session_state, 'show_result') and st.session_state.show_result:
             probability = st.session_state.probability
             
-            # Determine risk level
+            # Risk classification
             if probability >= 0.45:
                 risk_class = "risk-high"
                 risk_text = "HIGH RISK"
-                recommendation = "Consider CPE isolation precautions and targeted screening"
+                risk_emoji = "🔴"
+                recommendation = "Immediate CPE screening and isolation precautions recommended"
             elif probability >= 0.3:
                 risk_class = "risk-medium"
                 risk_text = "MODERATE RISK"
-                recommendation = "Enhanced monitoring and standard infection control measures"
+                risk_emoji = "🟡"
+                recommendation = "Enhanced monitoring and standard precautions"
             else:
                 risk_class = "risk-low"
                 risk_text = "LOW RISK"
-                recommendation = "Standard care protocols appropriate"
+                risk_emoji = "🟢"
+                recommendation = "Standard infection control measures"
             
-            # Results box
+            # Results display
             st.markdown(f'''
             <div class="{risk_class}">
                 <div class="results-box">
-                    <div class="results-title">🎯 CPE Risk Assessment</div>
+                    <div class="results-title">{risk_emoji} CPE Risk Assessment Result</div>
                     <div class="results-content">
-                        <strong>{risk_text}</strong><br>
-                        Risk Probability: <strong>{probability*100:.1f}%</strong><br><br>
-                        {recommendation}
+                        <div style="font-size: 2rem; font-weight: 800; margin: 1rem 0;">{risk_text}</div>
+                        <div style="font-size: 1.5rem; margin: 0.5rem 0;">Risk Score: <strong>{probability*100:.1f}%</strong></div>
+                        <hr style="margin: 1.5rem 0; opacity: 0.3;">
+                        <div style="font-size: 1.1rem;">{recommendation}</div>
                     </div>
                 </div>
             </div>
             ''', unsafe_allow_html=True)
             
-            # Model performance
+            # Model metrics
             st.markdown('<div class="info-box">', unsafe_allow_html=True)
-            st.markdown('<div class="info-title">📊 Model Performance</div>', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">📊 Model Performance Metrics</div>', unsafe_allow_html=True)
             st.markdown(f'''
             <div class="info-content">
-                <strong>Sensitivity:</strong> 62% (detects 62% of CPE carriers)<br>
-                <strong>ROC-AUC:</strong> 0.71 (good discrimination)<br>
-                <strong>Model Threshold:</strong> 45%<br>
-                <strong>Validation:</strong> 2,923 ICU patients (2023)<br>
-                <strong>CPE Prevalence:</strong> 8-11% in ICU patients
+                <strong>Sensitivity:</strong> 62.0%<br>
+                <strong>Specificity:</strong> 68.5%<br>
+                <strong>ROC-AUC:</strong> 0.71<br>
+                <strong>PPV:</strong> 17.8%<br>
+                <strong>NPV:</strong> 94.2%<br>
+                <strong>Threshold:</strong> 45%
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
             
         else:
-            # About this calculator
+            # About section
             st.markdown('<div class="info-box">', unsafe_allow_html=True)
             st.markdown('<div class="info-title">🏥 About This Calculator</div>', unsafe_allow_html=True)
             st.markdown('''
             <div class="info-content">
-                <strong>Purpose:</strong> Predicts CPE colonization risk within 48 hours of ICU admission<br><br>
+                This tool predicts CPE colonization risk for ICU patients using a validated machine learning model.<br><br>
                 
                 <strong>Algorithm:</strong> Logistic Regression with SMOTE<br>
-                <strong>Training Data:</strong> 1,992 ICU admissions (2022)<br>
-                <strong>Validation Data:</strong> 2,923 ICU admissions (2023)<br>
-                <strong>Institution:</strong> Hallym University Sacred Heart Hospital<br><br>
+                <strong>Training:</strong> 1,992 ICU admissions (2022)<br>
+                <strong>Validation:</strong> 2,923 ICU admissions (2023)<br>
+                <strong>CPE Prevalence:</strong> 8-11% in ICU setting<br><br>
                 
-                <strong>Key Predictors:</strong><br>
-                • Central venous catheter use<br>
-                • Nasogastric tube placement<br>
-                • Prior antibiotic exposure<br>
-                • Long-term care facility admission<br>
-                • Hospital days before ICU<br><br>
+                <em>For clinical decision support only.</em>
+            </div>
+            ''', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # About researcher section (#3 addition)
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">👨‍⚕️ About the Researcher</div>', unsafe_allow_html=True)
+            st.markdown('''
+            <div class="info-content">
+                <strong>Principal Investigator:</strong> [Name]<br>
+                <strong>Institution:</strong> Hallym University Sacred Heart Hospital<br>
+                <strong>Department:</strong> Infectious Diseases<br>
+                <strong>Research Focus:</strong> Antimicrobial resistance & Healthcare epidemiology<br><br>
                 
-                <em>This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.</em>
+                <strong>Publications:</strong> 45+ peer-reviewed articles<br>
+                <strong>Contact:</strong> research@hallym.ac.kr
+            </div>
+            ''', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Clinical guidelines
+            st.markdown('<div class="info-box">', unsafe_allow_html=True)
+            st.markdown('<div class="info-title">📋 Clinical Guidelines</div>', unsafe_allow_html=True)
+            st.markdown('''
+            <div class="info-content">
+                <strong>High Risk (≥45%):</strong><br>
+                • Immediate rectal swab screening<br>
+                • Contact isolation precautions<br>
+                • Cohort nursing if possible<br><br>
+                
+                <strong>Moderate Risk (30-44%):</strong><br>
+                • Consider screening based on local epidemiology<br>
+                • Enhanced hand hygiene compliance<br><br>
+                
+                <strong>Low Risk (<30%):</strong><br>
+                • Standard precautions<br>
+                • Routine surveillance per protocol
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
