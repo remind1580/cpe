@@ -352,6 +352,16 @@ st.markdown("""
         border: none !important;
         box-shadow: none !important;
     }
+    /* Remove white section-box */
+    .section-box:empty {
+        display: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
 </style>
 
 <script>
