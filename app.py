@@ -728,12 +728,12 @@ def main():
                 • Immediate rectal swab screening
                 • Contact isolation precautions
                 • Cohort nursing if possible
-                
+    
                Moderate Risk (30-44%):
                 • Consider screening based on local epidemiology
                 • Enhanced hand hygiene compliance
                 
-                <strong>Low Risk (<30%):
+                Low Risk (<30%):
                 • Standard precautions
                 • Routine surveillance per protocol
             </div>
