@@ -679,31 +679,32 @@ def main():
         else:
             # About section
             st.markdown('<div class="info-box">', unsafe_allow_html=True)
-            st.markdown('<div class="info-title">🏥 About This Calculator</div>', unsafe_allow_html=True)
             st.markdown('''
-            <div class="info-content">
-                Purpose
-                Predicts CPE colonization risk within 48 hours of ICU admission
-                Algorithm
+            <div class="info-title">🏥 About This Calculator</div>
+            <div class="info-content" style="font-size:1.1rem; color:#1F2937; line-height:1.8; font-weight:500">
+                **Purpose**  
+                Predicts CPE colonization risk within 48 hours of ICU admission.
+        
+                **Algorithm**  
                 Logistic Regression with SMOTE
                 
-                Training Data
-                1,992 ICU admissions (2022)
+                **Training / Validation Data**  
+                Combined dataset of 2022 and 2023 ICU admissions  
+                - Total: 4,915 ICU admissions  
+                - Split: 80% training, 20% validation
                 
-                Validation Data
-                2,923 ICU admissions (2023)
-                
-                Institution
+                **Institution**  
                 Hallym University Sacred Heart Hospital
                 
-                Key Predictors
-                - Central venous catheter use
-                - Nasogastric tube placement
-                - Prior antibiotic exposure              
-                - Long-term care facility admission       
-                - Hospital days before ICU admission
+                **Key Predictors**  
+                • Central venous catheter use  
+                • Nasogastric tube placement  
+                • Prior antibiotic exposure  
+                • Long-term care facility admission  
+                • Hospital days before ICU admission  
                 
-                <em>This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.</em>
+                <div style="margin-top:1rem; font-size:0.95rem; font-style:italic; color:#374151">
+                This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
