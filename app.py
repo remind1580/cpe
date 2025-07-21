@@ -686,7 +686,7 @@ def main():
                 Predicts CPE colonization risk within 48 hours of ICU admission.
         
                 **Algorithm**  
-                Logistic Regression with SMOTE
+                Logistic Regression without SMOTE
                 
                 **Training / Validation Data**  
                 Combined dataset of 2022 and 2023 ICU admissions  
@@ -703,7 +703,6 @@ def main():
                 • Long-term care facility admission  
                 • Hospital days before ICU admission  
                 
-                <div style="margin-top:1rem; font-size:0.95rem; font-style:italic; color:#374151">
                 This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.
             </div>
             ''', unsafe_allow_html=True)
