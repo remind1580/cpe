@@ -693,9 +693,6 @@ def main():
                 - Total: 4,915 ICU admissions  
                 - Split: 80% training, 20% validation
                 
-                **Institution**  
-                Hallym University Sacred Heart Hospital
-                
                 **Key Predictors**  
                 • Central venous catheter use  
                 • Nasogastric tube placement  
@@ -718,8 +715,6 @@ def main():
                 <strong>Department:</strong> Infectious Diseases<br>
                 <strong>Research Focus:</strong> Antimicrobial resistance & Healthcare epidemiology<br><br>
                 
-                <strong>Publications:</strong> 45+ peer-reviewed articles<br>
-                <strong>Contact:</strong> research@hallym.ac.kr
             </div>
             ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
@@ -729,17 +724,17 @@ def main():
             st.markdown('<div class="info-title">📋 Clinical Guidelines</div>', unsafe_allow_html=True)
             st.markdown('''
             <div class="info-content">
-                <strong>High Risk (≥45%):</strong><br>
-                • Immediate rectal swab screening<br>
-                • Contact isolation precautions<br>
-                • Cohort nursing if possible<br><br>
+              High Risk (≥45%)
+                • Immediate rectal swab screening
+                • Contact isolation precautions
+                • Cohort nursing if possible
                 
-                <strong>Moderate Risk (30-44%):</strong><br>
-                • Consider screening based on local epidemiology<br>
-                • Enhanced hand hygiene compliance<br><br>
+               Moderate Risk (30-44%):
+                • Consider screening based on local epidemiology
+                • Enhanced hand hygiene compliance
                 
-                <strong>Low Risk (<30%):</strong><br>
-                • Standard precautions<br>
+                <strong>Low Risk (<30%):
+                • Standard precautions
                 • Routine surveillance per protocol
             </div>
             ''', unsafe_allow_html=True)
