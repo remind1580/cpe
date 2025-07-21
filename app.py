@@ -724,12 +724,13 @@ def main():
             st.markdown('<div class="info-title">📋 Clinical Guidelines</div>', unsafe_allow_html=True)
             st.markdown('''
             <div class="info-content">
-              High Risk (≥45%)
+            
+                High Risk (≥45%)
                 • Immediate rectal swab screening
                 • Contact isolation precautions
                 • Cohort nursing if possible
     
-               Moderate Risk (30-44%):
+                Moderate Risk (30-44%):
                 • Consider screening based on local epidemiology
                 • Enhanced hand hygiene compliance
                 
