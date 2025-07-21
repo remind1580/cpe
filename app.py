@@ -682,19 +682,26 @@ def main():
             st.markdown('<div class="info-title">🏥 About This Calculator</div>', unsafe_allow_html=True)
             st.markdown('''
             <div class="info-content">
-                <strong>Purpose:</strong> Predicts CPE colonization risk within 48 hours of ICU admission<br><br>
+                Purpose
+                Predicts CPE colonization risk within 48 hours of ICU admission
+                Algorithm
+                Logistic Regression with SMOTE
                 
-                <strong>Algorithm:</strong> Logistic Regression with SMOTE<br>
-                <strong>Training Data:</strong> 1,992 ICU admissions (2022)<br>
-                <strong>Validation Data:</strong> 2,923 ICU admissions (2023)<br>
-                <strong>Institution:</strong> Hallym University Sacred Heart Hospital<br><br>
+                Training Data
+                1,992 ICU admissions (2022)
                 
-                <strong>Key Predictors:</strong><br>
-                • Central venous catheter use<br>
-                • Nasogastric tube placement<br>
-                • Prior antibiotic exposure<br>
-                • Long-term care facility admission<br>
-                • Hospital days before ICU<br><br>
+                Validation Data
+                2,923 ICU admissions (2023)
+                
+                Institution
+                Hallym University Sacred Heart Hospital
+                
+                Key Predictors
+                - Central venous catheter use
+                - Nasogastric tube placement
+                - Prior antibiotic exposure              
+                - Long-term care facility admission       
+                - Hospital days before ICU admission
                 
                 <em>This tool is intended for clinical decision support and should be interpreted by qualified healthcare providers.</em>
             </div>
