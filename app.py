@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-import plotly.graph_objects as go
 
 # Page config
 st.set_page_config(
